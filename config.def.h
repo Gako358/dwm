@@ -44,7 +44,7 @@ static const char *colors[][3]      = {
 };
 
 static const char *statuscolors[][3] = {
-    { col_red1,     col_bg2,    col_red1    },
+    { col_red1,     col_bg2,    col_red2    },
     { col_green1,   col_bg2,    col_green2  },
     { col_yellow1,  col_bg2,    col_yellow2 },
     { col_purple1,  col_bg2,    col_purple2 },
