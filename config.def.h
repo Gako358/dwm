@@ -99,20 +99,51 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont,
 static const char *termcmd[]  = { "st", NULL };
 static const char scratchpadname[] = "scratchpad";
 static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34", NULL };
+static const char *cmdprintscreen[]  = { "scrot", "-d3", "/home/merrinx/Pictures/Screenshots/%Y-%m-%d-%s_$wx$h.png", NULL  };
 
 static Key keys[] = {
-	/* modifier                     key        function        argument */
-	{ MODKEY,                       XK_w,      spawn,          {.v = dmenucmd } },
-	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
-	{ MODKEY,                       XK_grave,  togglescratch,  {.v = scratchpadcmd } },
-	{ MODKEY|ShiftMask|ControlMask, XK_b,      togglebar,      {0} },
-	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
-	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
-	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
-	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
-	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
-	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
+	/* modifier                     key                     function        argument */
+	{ MODKEY,                       XK_w,                   spawn,          {.v = dmenucmd } },
+	{ MODKEY,                       XK_Return,              spawn,          {.v = termcmd } },
+	{ MODKEY,                       XK_grave,               togglescratch,  {.v = scratchpadcmd } },
+	{ MODKEY,                       XK_p,                   spawn,          {.v = cmdprintscreen } },
+	{ MODKEY|ShiftMask|ControlMask, XK_b,                   togglebar,      {0} },
+	{ MODKEY,                       XK_j,                   focusstack,     {.i = +1 } },
+	{ MODKEY,                       XK_k,                   focusstack,     {.i = -1 } },
+	{ MODKEY,                       XK_i,                   incnmaster,     {.i = +1 } },
+	{ MODKEY,                       XK_d,                   incnmaster,     {.i = -1 } },
+	{ MODKEY,                       XK_h,                   setmfact,       {.f = -0.05} },
+	{ MODKEY,                       XK_l,                   setmfact,       {.f = +0.05} },
 
+    // Spawning Apps
+	{ MODKEY,                       XK_s,                   spawn,          SHCMD("pcmanfm") },
+	{ MODKEY,                       XK_b,                   spawn,          SHCMD("st -e bashtop") },
+	{ MODKEY,                       XK_c,                   spawn,          SHCMD("st -e weechat") },
+	{ MODKEY|Mod1Mask,              XK_Return,              spawn,          SHCMD("st -e bash") },
+	{ MODKEY|ShiftMask,             XK_s,                   spawn, 		    SHCMD("surf") },
+	{ MODKEY|ShiftMask|Mod1Mask,    XK_s,                   spawn, 		    SHCMD("tabbed -c surf -e") },
+	{ MODKEY|ShiftMask,             XK_p,                   spawn, 		    SHCMD("st -e powerkit --config") },
+
+    // Change language
+	{ MODKEY|ControlMask|ShiftMask, XK_u,                   spawn,          SHCMD("setxkbmap -layout us") },
+	{ MODKEY|ControlMask|ShiftMask, XK_n,                   spawn,          SHCMD("setxkbmap -layout no") },
+
+    // Change Opacity
+	{ MODKEY|ShiftMask,             XK_a,                   spawn,          SHCMD("picom-trans -c 100") },
+	{ MODKEY,                       XK_a,                   spawn,          SHCMD("picom-trans -c -10") },
+
+    // Volume
+	{ MODKEY,                       XK_bracketright,        spawn,          SHCMD("amixer -q sset Master 3%+") },
+	{ MODKEY,                       XK_bracketleft,         spawn,          SHCMD("amixer -q sset Master 3%-") },
+
+    // Systemd and lock
+	{ MODKEY|Mod1Mask|ShiftMask,    XK_p,                   spawn,          SHCMD("systemctl suspend && slock") },
+	{ MODKEY|Mod1Mask|ShiftMask,    XK_l,                   spawn,          SHCMD("slock") },
+
+    // Shutdown PC
+	{ MODKEY|Mod1Mask|ShiftMask|ControlMask,    XK_p,      spawn,          SHCMD("systemctl poweroff") },
+
+    // Vanity
 	{ MODKEY|Mod4Mask,              XK_h,      incrgaps,       {.i = +1 } },
 	{ MODKEY|Mod4Mask,              XK_l,      incrgaps,       {.i = -1 } },
 	{ MODKEY|Mod4Mask|ShiftMask,    XK_h,      incrogaps,      {.i = +1 } },
@@ -130,7 +161,8 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_y,      incrovgaps,     {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_o,      incrovgaps,     {.i = -1 } },
 
-	{ MODKEY,                       XK_Return, zoom,           {0} },
+    // Client
+	{ MODKEY|ShiftMask,             XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY,                       XK_q,      killclient,     {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
@@ -145,6 +177,8 @@ static Key keys[] = {
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
+
+    // Tags
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
