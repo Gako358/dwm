@@ -11,10 +11,10 @@ static const unsigned int gappiv            = 19;       /* vert inner gap betwee
 static const unsigned int gappoh            = 19;       /* horiz outer gap between windows and screen edge */
 static const unsigned int gappov            = 19;       /* vert outer gap between windows and screen edge */
 static const int smartgaps                  = 0;        /* 1 means no outer gap when there is only one window */
-static const int user_bh                    = 28;       /* 0 means that dwm will calculate bar height, >= 1 means dwm will user_bh as bar height */
+static const int user_bh                    = 25;       /* 0 means that dwm will calculate bar height, >= 1 means dwm will user_bh as bar height */
 /* static const double focusopacity         = 1.0; */
 /* static const double unfocusopacity       = 0.85; */
-static const char *fonts[]                  = {"DejaVuSansMono Nerd Font:pixelsize=15:antialias=true:autohint=true"};
+static const char *fonts[]                  = {"DejaVuSansMono Nerd Font:pixelsize=14:antialias=true:autohint=true"};
 static const char dmenufont[]               = "monospace:size=15";
 /* colors */
 static const char col_bg1[]                 = "#282828";
@@ -44,13 +44,13 @@ static const char *colors[][3]      = {
 };
 
 static const char *statuscolors[][3] = {
-    { col_red1,     col_bg2,    col_red2    },
-    { col_green1,   col_bg2,    col_green2  },
-    { col_yellow1,  col_bg2,    col_yellow2 },
-    { col_purple1,  col_bg2,    col_purple2 },
-    { col_cyan1,    col_bg2,    col_cyan2   },
-    { col_fg,       col_bg2,    col_gray1   },
-    { col_yellow2,  col_bg2,    col_yellow1 },
+    { col_fg,   col_red1,       col_red2    },
+    { col_fg,   col_green1,     col_green2  },
+    { col_fg,   col_yellow1,    col_yellow2 },
+    { col_fg,   col_purple1,    col_purple2 },
+    { col_fg,   col_cyan1,      col_cyan2   },
+    { col_bg1,  col_fg,         col_gray2   },
+    { col_bg1,  col_yellow2,    col_yellow1 },
 };
 
 /* tagging */
