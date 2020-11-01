@@ -768,7 +768,9 @@ drawbar(Monitor *m)
 	x = drw_text(drw, x, 0, w, bh, lrpad / 2, m->ltsymbol, 0);
         
 	if ((m->ww - sw - x) > bh && n > 0) {
-        wt = (m->ww - sw - x) / n - 2 * plw;
+        /* wt = (m->ww - sw - x) / n - 2 * plw; */
+        // Setting the width of the tag bar, hard codet
+        wt = 190;
         for (c = m->clients; c; c = c->next) {
             if (!ISVISIBLE(c)) continue; /* only show titles of windows on current tag */
         
