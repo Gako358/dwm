@@ -38,15 +38,15 @@ static const char col_fg[]                  = "#ebdbb2";
 static const char *colors[][3]      = {
 	/*					            fg        bg        border   */
 	[SchemeNorm]        =	    { col_fg,   col_bg1,    col_bg1     },
-	[SchemeSel]         =	    { col_fg,   col_blue1,  col_blue2   },
-	[SchemeTitle]       =	    { col_fg,   col_bg1,    col_bg1     },
-	[SchemeTitleSel]    =	    { col_fg,   col_green1, col_bg1     },
+	[SchemeSel]         =	    { col_fg,   col_blue1,  col_bg1     },
+	[SchemeTitle]       =	    { col_fg,   col_blue2,  col_bg1     },
+	[SchemeTitleSel]    =	    { col_fg,   col_blue1,  col_bg1     },
 };
 
 static const char *statuscolors[][3] = {
-    { col_red1,     col_bg2,    col_red1    },
-    { col_yellow1,  col_bg2,    col_yellow1 },
-    { col_blue1,    col_bg2,    col_blue2   },
+    { col_red1,     col_bg2,    col_red2    },
+    { col_green1,   col_bg2,    col_green2  },
+    { col_yellow1,  col_bg2,    col_yellow2 },
     { col_purple1,  col_bg2,    col_purple2 },
     { col_cyan1,    col_bg2,    col_cyan2   },
     { col_fg,       col_bg2,    col_gray1   },
