@@ -8,7 +8,8 @@ static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]                  = {"DejaVuSansMono Nerd Font:pixelsize=14:antialias=true:autohint=true"};
 static const char dmenufont[]               = "monospace:size=15";
 /* colors */
-static const char col_bg[]                  = "#282828";
+static const char col_bg1[]                 = "#282828";
+static const char col_bg2[]                 = "#504945";
 static const char col_gray1[]               = "#928374";
 static const char col_red1[]                = "#cc241d";
 static const char col_red2[]                = "#fb4934";
@@ -27,19 +28,19 @@ static const char col_fg[]                  = "#ebdbb2";
 
 static const char *colors[][3]      = {
 	/*					            fg        bg        border   */
-	[SchemeNorm]        =	    { col_fg,   col_bg,     col_bg      },
+	[SchemeNorm]        =	    { col_fg,   col_bg1,    col_bg1     },
 	[SchemeSel]         =	    { col_fg,   col_blue1,  col_blue2   },
-	[SchemeTitle]       =	    { col_fg,   col_bg,     col_bg      },
-	[SchemeTitleSel]    =	    { col_fg,   col_green1, col_bg      },
+	[SchemeTitle]       =	    { col_fg,   col_bg1,    col_bg1     },
+	[SchemeTitleSel]    =	    { col_fg,   col_green1, col_bg1     },
 };
 
 static const char *statuscolors[][3] = {
-    { col_red1,     col_fg, col_red1    },
-    { col_yellow1,  col_fg, col_yellow1 },
-    { col_blue1,    col_fg, col_blue2   },
-    { col_purple1,  col_fg, col_purple2 },
-    { col_cyan1,    col_fg, col_cyan2   },
-    { col_bg,       col_fg, col_gray1   },
+    { col_red1,     col_bg2,    col_red1    },
+    { col_yellow1,  col_bg2,    col_yellow1 },
+    { col_blue1,    col_bg2,    col_blue2   },
+    { col_purple1,  col_bg2,    col_purple2 },
+    { col_cyan1,    col_bg2,    col_cyan2   },
+    { col_bg1,      col_bg2,    col_gray1   },
 };
 
 /* tagging */
@@ -68,7 +69,7 @@ static const Layout layouts[] = {
 };
 
 /* key definitions */
-#define MODKEY Mod1Mask
+#define MODKEY Mod4Mask
 #define TAGKEYS(KEY,TAG) \
 	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
@@ -80,21 +81,21 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_bg, "-nf", col_fg, "-sb", col_blue1, "-sf", col_green2, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_bg2, "-nf", col_fg, "-sb", col_blue1, "-sf", col_green2, NULL };
 static const char *termcmd[]  = { "st", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
-	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
-	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
-	{ MODKEY,                       XK_b,      togglebar,      {0} },
+	{ MODKEY,                       XK_w,      spawn,          {.v = dmenucmd } },
+	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
+	{ MODKEY|ShiftMask|ControlMask, XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
 	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
 	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
-	{ MODKEY,                       XK_Return, zoom,           {0} },
+	{ MODKEY|ShiftMask,             XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
