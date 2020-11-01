@@ -59,7 +59,7 @@
 
 /* enums */
 enum { CurNormal, CurResize, CurMove, CurLast }; /* cursor */
-enum { SchemeNorm, SchemeSel }; /* color schemes */
+enum { SchemeNorm, SchemeSel, SchemeTitle, SchemeTitleSel }; /* color schemes */
 enum { NetSupported, NetWMName, NetWMState, NetWMCheck,
        NetWMFullscreen, NetActiveWindow, NetWMWindowType,
        NetWMWindowTypeDialog, NetClientList, NetLast }; /* EWMH atoms */
@@ -162,6 +162,7 @@ static void detach(Client *c);
 static void detachstack(Client *c);
 static Monitor *dirtomon(int dir);
 static void drawbar(Monitor *m);
+static int drawstatus(Monitor *m);
 static void drawbars(void);
 static void enternotify(XEvent *e);
 static void expose(XEvent *e);
@@ -240,7 +241,7 @@ static const char broken[] = "broken";
 static char stext[256];
 static int screen;
 static int sw, sh;           /* X display screen geometry width, height */
-static int bh, blw = 0;      /* bar geometry */
+static int bh, plw, blw = 0; /* bar geometry */
 static int lrpad;            /* sum of left and right padding for text */
 static int (*xerrorxlib)(Display *, XErrorEvent *);
 static unsigned int numlockmask = 0;
@@ -264,6 +265,7 @@ static Atom wmatom[WMLast], netatom[NetLast];
 static int running = 1;
 static Cur *cursor[CurLast];
 static Clr **scheme;
+static Clr **statusscheme;
 static Display *dpy;
 static Drw *drw;
 static Monitor *mons, *selmon;
@@ -431,9 +433,9 @@ buttonpress(XEvent *e)
 		focus(NULL);
 	}
 	if (ev->window == selmon->barwin) {
-		i = x = 0;
+		i = 0; x = plw;
 		do
-			x += TEXTW(tags[i]);
+			x += TEXTW(tags[i]) + plw;
 		while (ev->x >= x && ++i < LENGTH(tags));
 		if (i < LENGTH(tags)) {
 			click = ClkTagBar;
@@ -696,25 +698,26 @@ dirtomon(int dir)
 void
 drawbar(Monitor *m)
 {
-	int x, w, tw = 0;
-	int boxs = drw->fonts->h / 9;
-	int boxw = drw->fonts->h / 6 + 2;
-	unsigned int i, occ = 0, urg = 0;
+	int x, w, wt, sw = 0;
+	unsigned int i, occ = 0, urg = 0, n = 0;
+	plw = drw->fonts->h / 2 + 1;
 	Client *c;
+    Clr *prevscheme, *nxtscheme;
 
 	/* draw status first so it can be overdrawn by tags later */
 	if (m == selmon) { /* status is only drawn on selected monitor */
 		drw_setscheme(drw, scheme[SchemeNorm]);
-		tw = TEXTW(stext) - lrpad + 2; /* 2px right padding */
-		drw_text(drw, m->ww - tw, 0, tw, bh, 0, stext, 0);
+		sw = drawstatus(m);
 	}
 
 	for (c = m->clients; c; c = c->next) {
+        if (ISVISIBLE(c)) n++;
 		occ |= c->tags;
 		if (c->isurgent)
 			urg |= c->tags;
 	}
 	x = 0;
+    prevscheme = scheme[SchemeNorm];
 	for (i = 0; i < LENGTH(tags); i++) {
 		w = TEXTW(tags[i]);
 		drw_setscheme(drw, scheme[m->tagset[m->seltags] & 1 << i ? SchemeSel : SchemeNorm]);
@@ -724,23 +727,86 @@ drawbar(Monitor *m)
 				m == selmon && selmon->sel && selmon->sel->tags & 1 << i,
 				urg & 1 << i);
 		x += w;
+		drw_settrans(drw, prevscheme, (nxtscheme = scheme[m->tagset[m->seltags] & 1 << i ? SchemeSel : SchemeNorm]));
+        drw_arrow(drw, x, 0, plw, bh, 1, 0);
+        x += plw;
+
+        drw_setscheme(drw, nxtscheme);
+        drw_text(drw, x, 0, w, bh, lrpad / 2, tags[i], urg & 1 << i);
+        x += w;
+
+        prevscheme = nxtscheme;
 	}
+    nxtscheme = scheme[SchemeNorm];
+    drw_settrans(drw, prevscheme, nxtscheme);
+    drw_arrow(drw, x, 0, plw, bh, 1, 0);
+    x += plw;
 	w = blw = TEXTW(m->ltsymbol);
 	drw_setscheme(drw, scheme[SchemeNorm]);
 	x = drw_text(drw, x, 0, w, bh, lrpad / 2, m->ltsymbol, 0);
+        
+	if ((m->ww - sw - x) > bh && n > 0) {
+        wt = (m->ww - sw - x) / n - 2 * plw;
+        for (c = m->clients; c; c = c->next) {
+            if (!ISVISIBLE(c)) continue; /* only show titles of windows on current tag */
+        
+        drw_setscheme(drw, c == m->sel ? scheme[SchemeTitleSel] : scheme[SchemeTitle]);
+        drw_text(drw, x + plw, 0, wt, bh, lrpad / 2, c->name, 0);
+        drw_settrans(drw, c == m->sel ? scheme[SchemeTitleSel] : scheme[SchemeTitle], scheme[SchemeNorm]);
+        drw_arrow(drw, x, 0, plw, bh, 0, 1);
+        drw_arrow(drw, x + wt + plw, 0, plw, bh, 1, 1);
+        x += wt + 2 * plw;
+        }
+    }
+    if (x < m->ww - sw) { /* when empty or not enough space to draw, clear out the title space */
+        drw_setscheme(drw, scheme[SchemeNorm]);
+        drw_rect(drw, x, 0, m->ww - sw - x, bh, 1, 1);
+    }
+    drw_map(drw, m->barwin, 0, 0, m->ww, bh);
+}
 
-	if ((w = m->ww - tw - x) > bh) {
-		if (m->sel) {
-			drw_setscheme(drw, scheme[m == selmon ? SchemeSel : SchemeNorm]);
-			drw_text(drw, x, 0, w, bh, lrpad / 2, m->sel->name, 0);
-			if (m->sel->isfloating)
-				drw_rect(drw, x + boxs, boxs, boxw, boxw, m->sel->isfixed, 0);
-		} else {
-			drw_setscheme(drw, scheme[SchemeNorm]);
-			drw_rect(drw, x, 0, w, bh, 1, 1);
-		}
-	}
-	drw_map(drw, m->barwin, 0, 0, m->ww, bh);
+int
+drawstatus(Monitor* m)
+{
+    char status[256];
+    int i, n = strlen(stext), cn = 0;
+    int x = m->ww, w = 0;
+    char *bs, bp = '|';
+    Clr *prevscheme = statusscheme[0], *nxtscheme;
+
+    strcpy(status, stext);
+
+    for (i = n, bs = &status[n-1]; i >= 0; i--, bs--) {
+        if (*bs == '<' || *bs == '/' || *bs == '\\' || *bs == '|') { /* block start */
+        cn = ((int) *(bs+1)) - 1;
+
+        if (cn < LENGTH(statuscolors)) {
+            drw_settrans(drw, prevscheme, (nxtscheme = statusscheme[cn]));
+        } else {
+            drw_settrans(drw, prevscheme, (nxtscheme = statusscheme[0]));
+        }
+        if (bp != '|') {
+            drw_arrow(drw, x - plw, 0, plw, bh, bp == '\\' ? 1 : 0, bp == '<' ? 0 : 1);
+            x -= plw;
+        }
+
+        drw_setscheme(drw, nxtscheme);
+        w = TEXTW(bs+2);
+        drw_text(drw, x - w, 0, w, bh, lrpad / 2, bs+2, 0);
+        x -= w;
+
+        bp = *bs;
+        *bs = 0;
+        prevscheme = nxtscheme;
+        }
+    }
+    if (bp != '|') {
+        drw_settrans(drw, prevscheme, scheme[SchemeNorm]);
+        drw_arrow(drw, x - plw, 0, plw, bh, bp == '\\' ? 1 : 0, bp == '<' ? 0 : 1);
+        drw_rect(drw, x - 2 * plw, 0, plw, bh, 1, 1);
+        x -= plw * 2;
+    }
+    return m->ww - x;
 }
 
 void
@@ -1571,6 +1637,9 @@ setup(void)
 	scheme = ecalloc(LENGTH(colors), sizeof(Clr *));
 	for (i = 0; i < LENGTH(colors); i++)
 		scheme[i] = drw_scm_create(drw, colors[i], 3);
+	statusscheme = ecalloc(LENGTH(statuscolors), sizeof(Clr *));
+	for (i = 0; i < LENGTH(statuscolors); i++)
+		statusscheme[i] = drw_scm_create(drw, statuscolors[i], 3);
 	/* init bars */
 	updatebars();
 	updatestatus();
