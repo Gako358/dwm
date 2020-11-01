@@ -40,7 +40,7 @@ static const char *statuscolors[][3] = {
     { col_blue1,    col_bg2,    col_blue2   },
     { col_purple1,  col_bg2,    col_purple2 },
     { col_cyan1,    col_bg2,    col_cyan2   },
-    { col_bg1,      col_bg2,    col_gray1   },
+    { col_fg,       col_bg2,    col_gray1   },
 };
 
 /* tagging */
@@ -97,7 +97,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
 	{ MODKEY|ShiftMask,             XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
-	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
+	{ MODKEY,                       XK_q,      killclient,     {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
