@@ -17,40 +17,30 @@ static const int user_bh                    = 25;       /* 0 means that dwm will
 static const char *fonts[]                  = {"DejaVuSansMono Nerd Font:pixelsize=14:antialias=true:autohint=true"};
 static const char dmenufont[]               = "monospace:size=15";
 /* colors */
-static const char col_bg1[]                 = "#282828";
-static const char col_bg2[]                 = "#504945";
-static const char col_gray1[]               = "#928374";
-static const char col_red1[]                = "#cc241d";
-static const char col_red2[]                = "#fb4934";
-static const char col_green1[]              = "#98971a";
-static const char col_green2[]              = "#b8bb26";
-static const char col_yellow1[]             = "#d79921";
-static const char col_yellow2[]             = "#d65d0e";
-static const char col_blue1[]               = "#458588";
-static const char col_blue2[]               = "#83a598";
-static const char col_purple1[]             = "#b16286";
-static const char col_purple2[]             = "#d3869b";
-static const char col_cyan1[]               = "#689d6a";
-static const char col_cyan2[]               = "#8ec07c";
-static const char col_gray2[]               = "#a89984";
+static const char col_bg[]                  = "#282828";
 static const char col_fg[]                  = "#ebdbb2";
+static const char col_gray[]                = "#504945";
+static const char col_red[]                 = "#cc241d";
+static const char col_green[]               = "#98971a";
+static const char col_yellow[]              = "#d79921";
+static const char col_blue[]                = "#458588";
+static const char col_purple[]              = "#b16286";
+static const char col_cyan[]                = "#689d6a";
 
 static const char *colors[][3]      = {
 	/*					            fg         bg       border   */
-	[SchemeNorm]        =	    { col_fg,   col_bg1,    col_bg1     },
-	[SchemeSel]         =	    { col_fg,   col_blue1,  col_bg1     },
-	[SchemeTitle]       =	    { col_fg,   col_blue1,  col_bg1     },
-	[SchemeTitleSel]    =	    { col_fg,   col_bg1,    col_bg1     },
+	[SchemeNorm]        =	    { col_fg,   col_bg,     col_bg     },
+	[SchemeSel]         =	    { col_fg,   col_blue,   col_bg     },
+	[SchemeTitle]       =	    { col_fg,   col_blue,   col_bg     },
+	[SchemeTitleSel]    =	    { col_fg,   col_bg,     col_bg     },
 };
 
 static const char *statuscolors[][3] = {
-    { col_fg,   col_red1,       col_red2    },
-    { col_fg,   col_green1,     col_green2  },
-    { col_fg,   col_yellow1,    col_yellow2 },
-    { col_fg,   col_purple1,    col_purple2 },
-    { col_fg,   col_cyan1,      col_cyan2   },
-    { col_bg1,  col_fg,         col_gray2   },
-    { col_bg1,  col_yellow2,    col_yellow1 },
+    { col_bg,   col_fg,         col_fg      },
+    { col_fg,   col_bg,         col_bg      },
+    { col_fg,   col_red,        col_red     },
+    { col_fg,   col_green,      col_green   },
+    { col_fg,   col_yellow,     col_yellow  },
 };
 
 /* tagging */
@@ -96,7 +86,7 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_bg2, "-nf", col_fg, "-sb", col_blue1, "-sf", col_green2, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray, "-nf", col_fg, "-sb", col_blue, "-sf", col_green, NULL };
 static const char *termcmd[]  = { "st", NULL };
 static const char scratchpadname[] = "scratchpad";
 static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34", NULL };
