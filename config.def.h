@@ -11,11 +11,11 @@ static const unsigned int gappiv            = 19;       /* vert inner gap betwee
 static const unsigned int gappoh            = 19;       /* horiz outer gap between windows and screen edge */
 static const unsigned int gappov            = 19;       /* vert outer gap between windows and screen edge */
 static const int smartgaps                  = 0;        /* 1 means no outer gap when there is only one window */
-static const int user_bh                    = 19;       /* 0 means that dwm will calculate bar height, >= 1 means dwm will user_bh as bar height */
+static const int user_bh                    = 25;       /* 0 means that dwm will calculate bar height, >= 1 means dwm will user_bh as bar height */
 /* static const double focusopacity         = 1.0; */
 /* static const double unfocusopacity       = 0.85; */
-static const char *fonts[]                  = {"DejaVuSansMono Nerd Font:pixelsize=13:antialias=true:autohint=true"};
-static const char dmenufont[]               = "monospace:size=15";
+static const char *fonts[]                  = {"DejaVuSansMono Nerd Font:pixelsize=14:antialias=true:autohint=true"};
+static const char dmenufont[]               = "monospace:size=14";
 /* colors */
 static const char col_bg[]                  = "#282828";
 static const char col_fg[]                  = "#ebdbb2";
