@@ -40,7 +40,7 @@ static const char *colors[][3]      = {
 	[SchemeNorm]        =	    { col_fg,   col_bg1,    col_bg1     },
 	[SchemeSel]         =	    { col_fg,   col_blue1,  col_bg1     },
 	[SchemeTitle]       =	    { col_fg,   col_blue2,  col_bg1     },
-	[SchemeTitleSel]    =	    { col_fg,   col_blue1,  col_bg1     },
+	[SchemeTitleSel]    =	    { col_fg,   col_bg1,    col_bg1     },
 };
 
 static const char *statuscolors[][3] = {
