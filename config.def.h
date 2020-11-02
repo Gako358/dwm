@@ -36,11 +36,11 @@ static const char col_gray2[]               = "#a89984";
 static const char col_fg[]                  = "#ebdbb2";
 
 static const char *colors[][3]      = {
-	/*					            fg            bg        border   */
-	[SchemeNorm]        =	    { col_fg,       col_bg1,    col_bg1     },
-	[SchemeSel]         =	    { col_fg,       col_blue1,  col_bg1     },
-	[SchemeTitle]       =	    { col_green1,   col_blue1,  col_bg1     },
-	[SchemeTitleSel]    =	    { col_fg,       col_bg1,    col_bg1     },
+	/*					            fg         bg       border   */
+	[SchemeNorm]        =	    { col_fg,   col_bg1,    col_bg1     },
+	[SchemeSel]         =	    { col_fg,   col_blue1,  col_bg1     },
+	[SchemeTitle]       =	    { col_fg,   col_blue1,  col_bg1     },
+	[SchemeTitleSel]    =	    { col_fg,   col_bg1,    col_bg1     },
 };
 
 static const char *statuscolors[][3] = {
