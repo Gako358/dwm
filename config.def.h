@@ -19,13 +19,13 @@ static const char dmenufont[]               = "monospace:size=15";
 /* colors */
 static const char col_bg[]                  = "#282828";
 static const char col_fg[]                  = "#ebdbb2";
-static const char col_gray[]                = "#504945";
 static const char col_red[]                 = "#cc241d";
+static const char col_gray[]                = "#504945";
+static const char col_blue[]                = "#458588";
+static const char col_cyan[]                = "#689d6a";
 static const char col_green[]               = "#98971a";
 static const char col_yellow[]              = "#d79921";
-static const char col_blue[]                = "#458588";
 static const char col_purple[]              = "#b16286";
-static const char col_cyan[]                = "#689d6a";
 
 static const char *colors[][3]      = {
 	/*					            fg         bg       border   */
@@ -39,8 +39,10 @@ static const char *statuscolors[][3] = {
     { col_bg,   col_fg,         col_fg      },
     { col_fg,   col_bg,         col_bg      },
     { col_fg,   col_red,        col_red     },
+    { col_fg,   col_blue,       col_blue    },
     { col_fg,   col_green,      col_green   },
     { col_fg,   col_yellow,     col_yellow  },
+    { col_fg,   col_purple,     col_purple  },
 };
 
 /* tagging */
@@ -86,7 +88,7 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray, "-nf", col_fg, "-sb", col_blue, "-sf", col_green, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray, "-nf", col_fg, "-sb", col_blue, "-sf", col_bg, NULL };
 static const char *termcmd[]  = { "st", NULL };
 static const char scratchpadname[] = "scratchpad";
 static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34", NULL };
