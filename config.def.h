@@ -37,13 +37,13 @@ static const char *colors[][3]      = {
 };
 
 static const char *statuscolors[][3] = {
-    { col_bg,   col_fg,         col_fg      },
-    { col_fg,   col_bg,         col_bg      },
-    { col_fg,   col_red,        col_red     },
-    { col_fg,   col_blue,       col_blue    },
-    { col_fg,   col_green,      col_green   },
-    { col_fg,   col_yellow,     col_yellow  },
-    { col_fg,   col_purple,     col_purple  },
+    { col_bg,       col_fg,         col_fg      },
+    { col_fg,       col_bg,         col_bg      },
+    { col_gray,     col_red,        col_red     },
+    { col_gray,     col_blue,       col_blue    },
+    { col_gray,     col_green,      col_green   },
+    { col_gray,     col_yellow,     col_yellow  },
+    { col_gray,     col_purple,     col_purple  },
 };
 
 /* tagging */
