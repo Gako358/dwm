@@ -19,6 +19,7 @@ static const char dmenufont[]               = "monospace:size=14";
 /* colors */
 static const char col_bg[]                  = "#282828";
 static const char col_fg[]                  = "#ebdbb2";
+static const char col_bar[]                 = "#ffdcc8"; //This hold the color of the image, make the bar transparent
 static const char col_red[]                 = "#fb4934";
 static const char col_gray[]                = "#504945";
 static const char col_dark[]                = "#3c3836";
@@ -30,15 +31,15 @@ static const char col_purple[]              = "#d3869b";
 
 static const char *colors[][3]      = {
 	/*					            fg         bg       border   */
-	[SchemeNorm]        =	    { col_fg,   col_bg,     col_bg     },
-	[SchemeSel]         =	    { col_fg,   col_blue,   col_bg     },
-	[SchemeTitle]       =	    { col_fg,   col_dark,   col_bg     },
-	[SchemeTitleSel]    =	    { col_fg,   col_bg,     col_bg     },
+	[SchemeNorm]        =   { col_gray,     col_bar,    col_bg     },
+	[SchemeSel]         =   { col_fg,       col_blue,   col_bg     },
+	[SchemeTitle]       =   { col_bar,      col_bar,    col_bg     },
+	[SchemeTitleSel]    =   { col_bar,      col_bar,    col_bg     },
 };
 
 static const char *statuscolors[][3] = {
-    { col_bg,       col_fg,         col_fg      },
-    { col_fg,       col_bg,         col_bg      },
+    { col_bg,       col_bar,        col_bar     },
+    { col_gray,     col_dark,       col_dark    },
     { col_gray,     col_red,        col_red     },
     { col_gray,     col_blue,       col_blue    },
     { col_gray,     col_green,      col_green   },
