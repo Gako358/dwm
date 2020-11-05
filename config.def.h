@@ -113,6 +113,7 @@ static Key keys[] = {
     // Spawning Apps
 	{ MODKEY,                       XK_s,                   spawn,          SHCMD("pcmanfm") },
 	{ MODKEY,                       XK_b,                   spawn,          SHCMD("st -e bashtop") },
+	{ Mod1Mask,                     XK_Return,              spawn,          SHCMD("st -e vifm") },
 	{ MODKEY,                       XK_c,                   spawn,          SHCMD("st -e weechat") },
 	{ MODKEY|Mod1Mask,              XK_Return,              spawn,          SHCMD("st -e bash") },
 	{ MODKEY|ShiftMask,             XK_s,                   spawn, 		    SHCMD("surf") },
