@@ -112,6 +112,7 @@ static Key keys[] = {
     // Spawning Apps
 	{ MODKEY,                       XK_s,                   spawn,          SHCMD("pcmanfm") },
 	{ MODKEY,                       XK_b,                   spawn,          SHCMD("st -e bashtop") },
+	{ MODKEY,                       XK_m,                   spawn,          SHCMD("st -e mutt") },
 	{ Mod1Mask,                     XK_Return,              spawn,          SHCMD("st -e vifm") },
 	{ MODKEY,                       XK_c,                   spawn,          SHCMD("st -e weechat") },
 	{ MODKEY|Mod1Mask,              XK_Return,              spawn,          SHCMD("st -e bash") },
@@ -162,7 +163,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_q,      killclient,     {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY|ShiftMask,             XK_f,      setlayout,      {.v = &layouts[1]} },
-	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
+	{ MODKEY|ShiftMask,             XK_m,      setlayout,      {.v = &layouts[2]} },
 	{ MODKEY,                       XK_f,      fullscreen,     {0} },
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
