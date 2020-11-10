@@ -49,7 +49,7 @@ static const char *statuscolors[][3] = {
 
 /* tagging */
 /* static const char *tags[] = { "", "", "", "", "", "", "", "", "" }; */
-static const char *tags[] = { "", "", "", "", "", "", "" };
+static const char *tags[] = { "", "", "", "", "", "", "" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -102,7 +102,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_Return,              spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_grave,               togglescratch,  {.v = scratchpadcmd } },
 	{ MODKEY,                       XK_p,                   spawn,          {.v = cmdprintscreen } },
-	{ MODKEY|ShiftMask|ControlMask, XK_b,                   togglebar,      {0} },
+	{ MODKEY,                       XK_b,                   togglebar,      {0} },
 	{ MODKEY,                       XK_j,                   focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,                   focusstack,     {.i = -1 } },
 	{ MODKEY,                       XK_i,                   incnmaster,     {.i = +1 } },
@@ -112,22 +112,24 @@ static Key keys[] = {
 
     // Spawning Apps
 	{ MODKEY,                       XK_s,                   spawn,          SHCMD("pcmanfm") },
-	{ MODKEY,                       XK_b,                   spawn,          SHCMD("st -e bashtop") },
-	{ MODKEY,                       XK_m,                   spawn,          SHCMD("st -e mutt") },
-	{ Mod1Mask,                     XK_Return,              spawn,          SHCMD("st -e vifm") },
-	{ MODKEY,                       XK_c,                   spawn,          SHCMD("st -e weechat") },
 	{ MODKEY|Mod1Mask,              XK_Return,              spawn,          SHCMD("st -e bash") },
-	{ MODKEY|ShiftMask,             XK_s,                   spawn, 		    SHCMD("surf") },
-	{ MODKEY|ShiftMask|Mod1Mask,    XK_s,                   spawn, 		    SHCMD("tabbed -c surf -e") },
-	{ MODKEY|ShiftMask,             XK_p,                   spawn, 		    SHCMD("st -e powerkit --config") },
+	{ MODKEY|Mod1Mask,              XK_s,                   spawn, 		    SHCMD("surf") },
+	{ MODKEY|Mod1Mask|ShiftMask,    XK_s,                   spawn, 		    SHCMD("tabbed -c surf -e") },
+
+    // Terminal Apps
+	{ Mod1Mask,                     XK_d,                   spawn,          SHCMD("st -e bashtop") },
+	{ Mod1Mask,                     XK_m,                   spawn,          SHCMD("st -e mutt") },
+	{ Mod1Mask,                     XK_Return,              spawn,          SHCMD("st -e vifm") },
+	{ Mod1Mask,                     XK_c,                   spawn,          SHCMD("st -e weechat") },
+	{ Mod1Mask,                     XK_p,                   spawn, 		    SHCMD("st -e powerkit --config") },
 
     // Change language
 	{ MODKEY|ControlMask|ShiftMask, XK_u,                   spawn,          SHCMD("setxkbmap -layout us") },
 	{ MODKEY|ControlMask|ShiftMask, XK_n,                   spawn,          SHCMD("setxkbmap -layout no") },
 
     // Change Opacity
-	{ MODKEY|ShiftMask,             XK_a,                   spawn,          SHCMD("picom-trans -c 100") },
 	{ MODKEY,                       XK_a,                   spawn,          SHCMD("picom-trans -c -10") },
+	{ MODKEY|ShiftMask,             XK_a,                   spawn,          SHCMD("picom-trans -c 100") },
 
     // Volume
 	{ MODKEY,                       XK_bracketright,        spawn,          SHCMD("amixer -q sset Master 3%+") },
@@ -138,38 +140,38 @@ static Key keys[] = {
 	{ MODKEY|Mod1Mask|ShiftMask,    XK_l,                   spawn,          SHCMD("slock") },
 
     // Shutdown PC
-	{ MODKEY|Mod1Mask|ShiftMask|ControlMask,    XK_p,      spawn,          SHCMD("systemctl poweroff") },
+	{ MODKEY|Mod1Mask|ShiftMask,    XK_p,      spawn,          SHCMD("systemctl poweroff") },
 
     // Vanity
-	{ MODKEY|Mod4Mask,              XK_h,      incrgaps,       {.i = +1 } },
-	{ MODKEY|Mod4Mask,              XK_l,      incrgaps,       {.i = -1 } },
-	{ MODKEY|Mod4Mask|ShiftMask,    XK_h,      incrogaps,      {.i = +1 } },
-	{ MODKEY|Mod4Mask|ShiftMask,    XK_l,      incrogaps,      {.i = -1 } },
-	{ MODKEY|Mod4Mask|ControlMask,  XK_h,      incrigaps,      {.i = +1 } },
-	{ MODKEY|Mod4Mask|ControlMask,  XK_l,      incrigaps,      {.i = -1 } },
-	{ MODKEY|Mod4Mask,              XK_0,      togglegaps,     {0} },
-	{ MODKEY|Mod4Mask|ShiftMask,    XK_0,      defaultgaps,    {0} },
-	{ MODKEY,                       XK_y,      incrihgaps,     {.i = +1 } },
-	{ MODKEY,                       XK_o,      incrihgaps,     {.i = -1 } },
-	{ MODKEY|ControlMask,           XK_y,      incrivgaps,     {.i = +1 } },
-	{ MODKEY|ControlMask,           XK_o,      incrivgaps,     {.i = -1 } },
-	{ MODKEY|Mod4Mask,              XK_y,      incrohgaps,     {.i = +1 } },
-	{ MODKEY|Mod4Mask,              XK_o,      incrohgaps,     {.i = -1 } },
-	{ MODKEY|ShiftMask,             XK_y,      incrovgaps,     {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_o,      incrovgaps,     {.i = -1 } },
+	{ Mod1Mask,                     XK_h,      incrgaps,       {.i = +1 } },
+	{ Mod1Mask,                     XK_l,      incrgaps,       {.i = -1 } },
+	{ Mod1Mask|ShiftMask,           XK_h,      incrogaps,      {.i = +1 } },
+	{ Mod1Mask|ShiftMask,           XK_l,      incrogaps,      {.i = -1 } },
+	{ Mod1Mask|ControlMask,         XK_h,      incrigaps,      {.i = +1 } },
+	{ Mod1Mask|ControlMask,         XK_l,      incrigaps,      {.i = -1 } },
+	{ Mod1Mask,                     XK_0,      togglegaps,     {0} },
+	{ Mod1Mask|ShiftMask,           XK_0,      defaultgaps,    {0} },
+	{ Mod1Mask,                     XK_y,      incrihgaps,     {.i = +1 } },
+	{ Mod1Mask,                     XK_o,      incrihgaps,     {.i = -1 } },
+	{ Mod1Mask|ShiftMask,           XK_y,      incrivgaps,     {.i = +1 } },
+	{ Mod1Mask|ShiftMask,           XK_o,      incrivgaps,     {.i = -1 } },
+	{ Mod1Mask|ControlMask,         XK_y,      incrohgaps,     {.i = +1 } },
+	{ Mod1Mask|ControlMask,         XK_o,      incrohgaps,     {.i = -1 } },
+	{ Mod1Mask|MODKEY,              XK_y,      incrovgaps,     {.i = +1 } },
+	{ Mod1Mask|MODKEY,              XK_o,      incrovgaps,     {.i = -1 } },
 
     // Client
 	{ MODKEY|ShiftMask,             XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY,                       XK_q,      killclient,     {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
-	{ MODKEY|ShiftMask,             XK_f,      setlayout,      {.v = &layouts[1]} },
-	{ MODKEY|ShiftMask,             XK_m,      setlayout,      {.v = &layouts[2]} },
-	{ MODKEY,                       XK_f,      fullscreen,     {0} },
+	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
+	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
+	{ MODKEY,                       XK_x,      fullscreen,     {0} },
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
-	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
+	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
 	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
