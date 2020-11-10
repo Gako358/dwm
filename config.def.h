@@ -49,7 +49,7 @@ static const char *statuscolors[][3] = {
 
 /* tagging */
 /* static const char *tags[] = { "", "", "", "", "", "", "", "", "" }; */
-static const char *tags[] = { "", "", "", "", "", "", "" };
+static const char *tags[] = { "", "", "", "ﭮ", "", "", "" };
 
 static const Rule rules[] = {
 	/* xprop(1):
