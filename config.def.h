@@ -136,7 +136,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_bracketleft,         spawn,          SHCMD("amixer -q sset Master 3%-") },
 
     // Systemd and lock
-	{ MODKEY|Mod1Mask|ShiftMask,    XK_p,                   spawn,          SHCMD("systemctl suspend && slock") },
+	{ MODKEY|Mod1Mask|ShiftMask,    XK_s,                   spawn,          SHCMD("systemctl suspend && slock") },
 	{ MODKEY|Mod1Mask|ShiftMask,    XK_l,                   spawn,          SHCMD("slock") },
 
     // Shutdown PC
