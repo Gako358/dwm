@@ -19,7 +19,7 @@ static const char dmenufont[]               = "monospace:size=14";
 /* colors */
 static const char col_bg[]                  = "#282828";
 static const char col_fg[]                  = "#ebdbb2";
-static const char col_bar[]                 = "#ffdcc8"; //This hold the color of the image, make the bar transparent
+static const char col_bar[]                 = "#fdebff"; //This hold the color of the image, make the bar transparent
 static const char col_red[]                 = "#fb4934";
 static const char col_gray[]                = "#504945";
 static const char col_dark[]                = "#3c3836";
