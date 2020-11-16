@@ -65,6 +65,8 @@ static const Rule rules[] = {
 	{ "Virt-manager",   NULL,       NULL,       1 << 6,       0,             0,            0 },
 	{ "Steam",          NULL,       NULL,       1 << 6,       1,             1,            0 },
 	{ "Lutris",         NULL,       NULL,       1 << 6,       1,             1,            0 },
+	{ "battle.net",     NULL,       NULL,       1 << 6,       1,             1,            0 },
+	{ "Star Citizen",   NULL,       NULL,       1 << 6,       1,             1,            0 },
 };
 
 /* layout(s) */
