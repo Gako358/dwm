@@ -59,12 +59,18 @@ static char *statuscolors[][ColCount] = {
     { norm_black,       norm_magenta,   norm_magenta,   norm_magenta     },                                 
 };
 
-const char *spcmd1[] = {"st", "-n", "spterm", "-g", "120x34", NULL };
-const char *spcmd2[] = {"st", "-n", "nmterm", "-g", "120x34", NULL };
+const char *spcmd1[] = {"st", "-n", "spterm",   "-g", "150x46", NULL };
+const char *spcmd2[] = {"st", "-n", "mutterm",  "-g", "170x55", NULL };
+const char *spcmd3[] = {"st", "-n", "ncmterm",  "-g", "120x55", NULL };
+const char *spcmd4[] = {"st", "-n", "bashterm", "-g", "170x55", NULL };
+const char *spcmd5[] = {"st", "-n", "weeterm",  "-g", "150x46", NULL };
 static Sp scratchpads[] = {
    /* name          cmd  */
    {"spterm",      spcmd1},
-   {"nmterm",      spcmd2},
+   {"mutterm",     spcmd2},
+   {"ncmterm",     spcmd3},
+   {"bashterm",    spcmd4},
+   {"weeterm",     spcmd5},
 };
 
 static char *tagicons[][NUMTAGS] = {
@@ -94,15 +100,16 @@ static const Rule rules[] = {
 	RULE(.wintype = WTYPE "UTILITY", .isfloating = 1)
 	RULE(.wintype = WTYPE "TOOLBAR", .isfloating = 1)
 	RULE(.wintype = WTYPE "SPLASH", .isfloating = 1)
-	RULE(.class = "Pcmanfm", .isfloating = 1)
-	RULE(.class = "Gimp", .isfloating = 1)
-	RULE(.class = "Brave", .tags = 1 << 0, .monitor = 0)
-	RULE(.class = "discord", .tags = 1 << 2, .monitor = 2, .switchtag = 1)
-	RULE(.class = "lyx", .tags = 1 << 4, .monitor = 1, .switchtag = 1)
+	RULE(.class = "Pcmanfm",    .isfloating = 1,    .iscentered = 1)
+	RULE(.class = "Gimp",       .isfloating = 1,    .iscentered = 1)
+	RULE(.class = "Brave",      .tags = 1 << 0,     .monitor = 0)
+	RULE(.class = "discord",    .tags = 1 << 2,     .monitor = 2,       .switchtag = 1)
+	RULE(.class = "lyx",        .tags = 1 << 4,     .monitor = 1,       .switchtag = 1)
     
     // Scratchpads
-	RULE(.instance = "spterm", .tags = SPTAG(0), .isfloating = 1)
-	RULE(.instance = "nmterm", .tags = SPTAG(0), .isfloating = 1)
+	RULE(.instance = "spterm",  .tags = SPTAG(0), .isfloating = 1)
+	RULE(.instance = "mutterm", .tags = SPTAG(1), .isfloating = 1)
+	RULE(.instance = "ncmterm", .tags = SPTAG(2), .isfloating = 1)
 };
 
 /* Bar rules allow you to configure what is shown where on the bar, as well as
@@ -167,7 +174,7 @@ static const char *dmenucmd[] = {
 	"-fn", dmenufont,
 	"-nb", norm_white,
 	"-nf", norm_black,
-	"-sb", norm_red,
+	"-sb", norm_green,
 	"-sf", norm_white,
 	NULL
 };
@@ -175,49 +182,84 @@ static const char *termcmd[]  = { "st", NULL };
 
 static Key keys[] = {
 	/* modifier                     key            function                argument */
-	{ MODKEY,                       XK_p,          spawn,                  {.v = dmenucmd } },
-	{ MODKEY|ShiftMask,             XK_Return,     spawn,                  {.v = termcmd } },
-	{ MODKEY,                       XK_b,          togglebar,              {0} },
+	{ MODKEY,                       XK_w,          spawn,                  {.v = dmenucmd } },
+	{ MODKEY,                       XK_Return,     spawn,                  {.v = termcmd } },
 	{ MODKEY,                       XK_j,          focusstack,             {.i = +1 } },
 	{ MODKEY,                       XK_k,          focusstack,             {.i = -1 } },
 	{ MODKEY,                       XK_i,          incnmaster,             {.i = +1 } },
 	{ MODKEY,                       XK_d,          incnmaster,             {.i = -1 } },
 	{ MODKEY,                       XK_h,          setmfact,               {.f = -0.05} },
 	{ MODKEY,                       XK_l,          setmfact,               {.f = +0.05} },
+	{ MODKEY|ShiftMask,             XK_b,          togglebar,              {0} },
+
+    // Apps
+    { MODKEY,                       XK_s,          spawn,                  SHCMD("pcmanfm")             },
+    { MODKEY|Mod1Mask,              XK_Return,     spawn,                  SHCMD("st -e bash")          },
+    { MODKEY|Mod1Mask,              XK_s,          spawn,                  SHCMD("surf")                },
+    { MODKEY|Mod1Mask|ShiftMask,    XK_s,          spawn,                  SHCMD("tabbed -c surf -e")   },
+
+    // Terminal
+    { Mod1Mask,                     XK_Return,     spawn,                  SHCMD("st -e vifm")          },
+    { Mod1Mask,                     XK_p,          spawn,                  SHCMD("st -e powerkit --config")  },
+
+    // Language
+    { MODKEY|ControlMask|ShiftMask, XK_u,          spawn,                  SHCMD("setxkbmap -layout us")  },
+    { MODKEY|ControlMask|ShiftMask, XK_n,          spawn,                  SHCMD("setxkbmap -layout no")  },
+
+    // Opacity
+    { MODKEY,                       XK_a,          spawn,                  SHCMD("picom-trans -c -10")  },
+    { MODKEY|ShiftMask,             XK_a,          spawn,                  SHCMD("picom-trans -c 100")  },
+
+    // Volume
+    { MODKEY,                       XK_bracketright,        spawn,         SHCMD("amixer -q sset Master 3%+")  },
+    { MODKEY,                       XK_bracketleft,         spawn,         SHCMD("amixer -q sset Master 3%-")  },
+
+    // Suspend and lock
+    { MODKEY|Mod1Mask|ShiftMask,    XK_s,          spawn,                  SHCMD("systemctl suspend && slock")  },
+    { MODKEY|Mod1Mask|ShiftMask,    XK_l,          spawn,                  SHCMD("slock")  },
+
+    // Poweroff
+    { MODKEY|Mod1Mask|ShiftMask,    XK_p,          spawn,                  SHCMD("systemctl poweroff")  },
 
     // Vanity
-	{ MODKEY|Mod4Mask,              XK_u,          incrgaps,               {.i = +1 } },
-	{ MODKEY|Mod4Mask|ShiftMask,    XK_u,          incrgaps,               {.i = -1 } },
-	{ MODKEY|Mod4Mask,              XK_i,          incrigaps,              {.i = +1 } },
-	{ MODKEY|Mod4Mask|ShiftMask,    XK_i,          incrigaps,              {.i = -1 } },
-	{ MODKEY|Mod4Mask,              XK_o,          incrogaps,              {.i = +1 } },
-	{ MODKEY|Mod4Mask|ShiftMask,    XK_o,          incrogaps,              {.i = -1 } },
-	{ MODKEY|Mod4Mask,              XK_6,          incrihgaps,             {.i = +1 } },
-	{ MODKEY|Mod4Mask|ShiftMask,    XK_6,          incrihgaps,             {.i = -1 } },
-	{ MODKEY|Mod4Mask,              XK_7,          incrivgaps,             {.i = +1 } },
-	{ MODKEY|Mod4Mask|ShiftMask,    XK_7,          incrivgaps,             {.i = -1 } },
-	{ MODKEY|Mod4Mask,              XK_8,          incrohgaps,             {.i = +1 } },
-	{ MODKEY|Mod4Mask|ShiftMask,    XK_8,          incrohgaps,             {.i = -1 } },
-	{ MODKEY|Mod4Mask,              XK_9,          incrovgaps,             {.i = +1 } },
-	{ MODKEY|Mod4Mask|ShiftMask,    XK_9,          incrovgaps,             {.i = -1 } },
-	{ MODKEY|Mod4Mask,              XK_0,          togglegaps,             {0} },
-	{ MODKEY|Mod4Mask|ShiftMask,    XK_0,          defaultgaps,            {0} },
+	{ MODKEY|Mod1Mask,              XK_u,          incrgaps,               {.i = +1 } },
+	{ MODKEY|Mod1Mask|ShiftMask,    XK_u,          incrgaps,               {.i = -1 } },
+	{ MODKEY|Mod1Mask,              XK_i,          incrigaps,              {.i = +1 } },
+	{ MODKEY|Mod1Mask|ShiftMask,    XK_i,          incrigaps,              {.i = -1 } },
+	{ MODKEY|Mod1Mask,              XK_o,          incrogaps,              {.i = +1 } },
+	{ MODKEY|Mod1Mask|ShiftMask,    XK_o,          incrogaps,              {.i = -1 } },
+	{ MODKEY|Mod1Mask,              XK_6,          incrihgaps,             {.i = +1 } },
+	{ MODKEY|Mod1Mask|ShiftMask,    XK_6,          incrihgaps,             {.i = -1 } },
+	{ MODKEY|Mod1Mask,              XK_7,          incrivgaps,             {.i = +1 } },
+	{ MODKEY|Mod1Mask|ShiftMask,    XK_7,          incrivgaps,             {.i = -1 } },
+	{ MODKEY|Mod1Mask,              XK_8,          incrohgaps,             {.i = +1 } },
+	{ MODKEY|Mod1Mask|ShiftMask,    XK_8,          incrohgaps,             {.i = -1 } },
+	{ MODKEY|Mod1Mask,              XK_9,          incrovgaps,             {.i = +1 } },
+	{ MODKEY|Mod1Mask|ShiftMask,    XK_9,          incrovgaps,             {.i = -1 } },
+	{ MODKEY|Mod1Mask,              XK_0,          togglegaps,             {0} },
+	{ MODKEY|Mod1Mask|ShiftMask,    XK_0,          defaultgaps,            {0} },
 
 	{ MODKEY,                       XK_Tab,        view,                   {0} },
-	{ MODKEY|ShiftMask,             XK_c,          killclient,             {0} },
+    { MODKEY|ShiftMask,             XK_Return,     zoom,                   {0} },
+	{ MODKEY,                       XK_q,          killclient,             {0} },
 	{ MODKEY|ShiftMask,             XK_q,          quit,                   {0} },
-	{ MODKEY|ControlMask|ShiftMask, XK_q,          quit,                   {1} },
+	{ MODKEY|Mod1Mask|ShiftMask,    XK_q,          quit,                   {1} },
 	{ MODKEY,                       XK_t,          setlayout,              {.v = &layouts[0]} },
 	{ MODKEY,                       XK_f,          setlayout,              {.v = &layouts[1]} },
-	{ MODKEY,                       XK_m,          setlayout,              {.v = &layouts[2]} },
+	{ MODKEY|Mod1Mask,              XK_m,          setlayout,              {.v = &layouts[2]} },
+	{ MODKEY|ShiftMask,             XK_m,          setlayout,              {.v = &layouts[3]} },
 	{ MODKEY,                       XK_space,      setlayout,              {0} },
 	{ MODKEY|ShiftMask,             XK_space,      togglefloating,         {0} },
     
     // Scratchpads
-	{ MODKEY,                       XK_grave,      togglescratch,          {.ui = 0 } },
+	{ MODKEY,                       XK_grave,      togglescratch,          {.ui = 0 } }, // Default Scratch
+	{ MODKEY,                       XK_m,          togglescratch,          {.ui = 1 } }, // Mutt
+	{ MODKEY,                       XK_n,          togglescratch,          {.ui = 2 } }, // NCMPCPP
+	{ MODKEY,                       XK_b,          togglescratch,          {.ui = 3 } }, // Bashtop
+	{ MODKEY,                       XK_c,          togglescratch,          {.ui = 4 } }, // Weechat
 	{ MODKEY|ControlMask,           XK_grave,      setscratch,             {.ui = 0 } },
 	{ MODKEY|ShiftMask,             XK_grave,      removescratch,          {.ui = 0 } },
-	{ MODKEY|ShiftMask,             XK_f,          fullscreen,             {0} },
+	{ MODKEY,                       XK_x,          fullscreen,             {0} },
 	{ MODKEY|ShiftMask,             XK_s,          togglesticky,           {0} },
 	{ MODKEY,                       XK_0,          view,                   {.ui = ~SPTAGMASK } },
 	{ MODKEY|ShiftMask,             XK_0,          tag,                    {.ui = ~SPTAGMASK } },
