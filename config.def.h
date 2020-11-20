@@ -74,7 +74,7 @@ static Sp scratchpads[] = {
 };
 
 static char *tagicons[][NUMTAGS] = {
-	[DEFAULT_TAGS]        = { "1", "2", "3", "4", "5", "6", "7", "8", "9" },
+	[DEFAULT_TAGS]        = { "", "", "", "", "", "", "", "", "" },
 	[ALTERNATIVE_TAGS]    = { "A", "B", "C", "D", "E", "F", "G", "H", "I" },
 	[ALT_TAGS_DECORATION] = { "<1>", "<2>", "<3>", "<4>", "<5>", "<6>", "<7>", "<8>", "<9>" },
 };
@@ -100,16 +100,26 @@ static const Rule rules[] = {
 	RULE(.wintype = WTYPE "UTILITY", .isfloating = 1)
 	RULE(.wintype = WTYPE "TOOLBAR", .isfloating = 1)
 	RULE(.wintype = WTYPE "SPLASH", .isfloating = 1)
-	RULE(.class = "Pcmanfm",    .isfloating = 1,    .iscentered = 1)
-	RULE(.class = "Gimp",       .isfloating = 1,    .iscentered = 1)
-	RULE(.class = "Brave",      .tags = 1 << 0,     .monitor = 0)
-	RULE(.class = "discord",    .tags = 1 << 2,     .monitor = 2,       .switchtag = 1)
-	RULE(.class = "lyx",        .tags = 1 << 4,     .monitor = 1,       .switchtag = 1)
+	RULE(.class = "Pcmanfm",        .isfloating = 1,    .iscentered = 1)
+	RULE(.class = "Gimp",           .isfloating = 1,    .iscentered = 1)
+	RULE(.class = "Brave",          .tags = 1 << 0,     .monitor = 0)
+	RULE(.class = "discord",        .tags = 1 << 2,     .monitor = 2,   .switchtag = 1)
+	RULE(.class = "lyx",            .tags = 1 << 4,     .monitor = 1,   .switchtag = 1)
+	RULE(.class = "Virt-manager",   .tags = 1 << 6,     .monitor = 2,   .switchtag = 1)
+	RULE(.class = "Steam",          .tags = 1 << 5,     .monitor = 1,   .isfloating = 1,    .iscentered = 1,   .switchtag = 1)
+	RULE(.class = "Lutris",          .tags = 1 << 5,    .monitor = 1,   .isfloating = 1,    .iscentered = 1,   .switchtag = 1)
+
+    // Games
+	RULE(.class = "Battle.net.exe", .tags = 1 << 7,     .monitor = 1,   .isfloating = 1,    .iscentered = 1)
+	RULE(.class = "explorer.exe",   .tags = 1 << 7,     .monitor = 1,   .isfloating = 1,    .iscentered = 1)
+	RULE(.class = "Star Citizen",   .tags = 1 << 7,     .monitor = 1,   .isfloating = 1,    .iscentered = 1)
     
     // Scratchpads
-	RULE(.instance = "spterm",  .tags = SPTAG(0), .isfloating = 1)
-	RULE(.instance = "mutterm", .tags = SPTAG(1), .isfloating = 1)
-	RULE(.instance = "ncmterm", .tags = SPTAG(2), .isfloating = 1)
+	RULE(.instance = "spterm",      .tags = SPTAG(0), .isfloating = 1)
+	RULE(.instance = "mutterm",     .tags = SPTAG(1), .isfloating = 1)
+	RULE(.instance = "ncmterm",     .tags = SPTAG(2), .isfloating = 1)
+	RULE(.instance = "bashterm",    .tags = SPTAG(3), .isfloating = 1)
+	RULE(.instance = "weeterm",     .tags = SPTAG(4), .isfloating = 1)
 };
 
 /* Bar rules allow you to configure what is shown where on the bar, as well as
@@ -199,8 +209,8 @@ static Key keys[] = {
     { MODKEY|Mod1Mask|ShiftMask,    XK_s,          spawn,                  SHCMD("tabbed -c surf -e")   },
 
     // Terminal
-    { Mod1Mask,                     XK_Return,     spawn,                  SHCMD("st -e vifm")          },
-    { Mod1Mask,                     XK_p,          spawn,                  SHCMD("st -e powerkit --config")  },
+    { MODKEY|ShiftMask,             XK_Return,     spawn,                  SHCMD("st -e vifm")          },
+    { MODKEY,                       XK_p,          spawn,                  SHCMD("st -e powerkit --config")  },
 
     // Language
     { MODKEY|ControlMask|ShiftMask, XK_u,          spawn,                  SHCMD("setxkbmap -layout us")  },
