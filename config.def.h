@@ -112,7 +112,7 @@ static const Rule rules[] = {
 	RULE(.class = "lyx",            .tags = 1 << 4,     .monitor = 0,   .switchtag = 1)
 	RULE(.class = "Virt-manager",   .tags = 1 << 6,     .monitor = 1,   .switchtag = 1)
 	RULE(.class = "Steam",          .tags = 1 << 5,     .monitor = 0,   .isfloating = 1,    .iscentered = 1,   .switchtag = 1)
-	RULE(.class = "Lutris",         .tags = 1 << 7,    .monitor = 0,   .isfloating = 1,    .iscentered = 1,   .switchtag = 1)
+	RULE(.class = "Lutris",         .tags = 1 << 7,     .monitor = 0,   .isfloating = 1,    .iscentered = 1,   .switchtag = 1)
 
     // Games
 	RULE(.class = "Battle.net.exe", .tags = 1 << 7,     .monitor = 0,   .isfloating = 1,    .iscentered = 1)
