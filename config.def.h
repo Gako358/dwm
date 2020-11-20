@@ -20,7 +20,9 @@ static const int showsystray             = 1;   /* 0 means no systray */
 static int tagindicatortype              = INDICATOR_TOP_LEFT_SQUARE;
 static int tiledindicatortype            = INDICATOR_NONE;
 static int floatindicatortype            = INDICATOR_TOP_LEFT_SQUARE;
-static const char statussep              = ';'; /* separator between status bars */
+
+// To be used with extrabar 
+/* static const char statussep              = ';'; /1* separator between status bars *1/ */
 static const char *fonts[]               = {"DejaVuSansMono Nerd Font:pixelsize=14:antialias=true:autohint=true"};
 static const char dmenufont[]            = "monospace:size=14";
 
@@ -44,7 +46,8 @@ static char *colors[][ColCount] = {
     [SchemeTitleSel]     = { norm_bar,          norm_bar,       norm_black,     norm_black  },
     [SchemeTagsNorm]     = { norm_black,        norm_bar,       norm_black,     norm_black  },
     [SchemeTagsSel]      = { norm_black,        norm_bar,       norm_black,     norm_black  },
-    /* [SchemeBottom]       = { norm_black,        norm_black,     norm_black,     norm_black  }, */
+
+    /* [SchemeBottom]       = { norm_black,       norm_black,       norm_black,           norm_black  }, */
     /* [SchemeHid]          = { hidfgcolor,       hidbgcolor,       hidbordercolor,       hidfloatcolor  }, */
     /* [SchemeUrg]          = { urgfgcolor,       urgbgcolor,       urgbordercolor,       urgfloatcolor  }, */                         
 };
