@@ -209,7 +209,7 @@ static Key keys[] = {
     { MODKEY|Mod1Mask|ShiftMask,    XK_s,          spawn,                  SHCMD("tabbed -c surf -e")   },
 
     // Terminal
-    { MODKEY|ShiftMask,             XK_Return,     spawn,                  SHCMD("st -e vifm")          },
+    { MODKEY,                       XK_r,     spawn,                  SHCMD("st -e vifm")          },
     { MODKEY,                       XK_p,          spawn,                  SHCMD("st -e powerkit --config")  },
 
     // Language
