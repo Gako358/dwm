@@ -61,10 +61,10 @@ static char *statuscolors[][ColCount] = {
 };
 
 const char *spcmd1[] = {"st", "-n", "spterm",   "-g", "150x46", NULL };
-const char *spcmd2[] = {"st", "-n", "mutterm",  "-g", "170x55", NULL };
-const char *spcmd3[] = {"st", "-n", "ncmterm",  "-g", "120x55", NULL };
-const char *spcmd4[] = {"st", "-n", "bashterm", "-g", "170x55", NULL };
-const char *spcmd5[] = {"st", "-n", "weeterm",  "-g", "150x46", NULL };
+const char *spcmd2[] = {"st", "-n", "mutterm",  "-g", "170x55", "-e", "mutt", NULL };
+const char *spcmd3[] = {"st", "-n", "ncmterm",  "-g", "120x55", "-e", "ncmpcpp",  NULL };
+const char *spcmd4[] = {"st", "-n", "bashterm", "-g", "170x55", "-e", "bashtop",  NULL };
+const char *spcmd5[] = {"st", "-n", "weeterm",  "-g", "150x46", "-e", "weechat",  NULL };
 static Sp scratchpads[] = {
    /* name          cmd  */
    {"spterm",      spcmd1},
@@ -103,17 +103,17 @@ static const Rule rules[] = {
 	RULE(.wintype = WTYPE "SPLASH", .isfloating = 1)
 	RULE(.class = "Pcmanfm",        .isfloating = 1,    .iscentered = 1)
 	RULE(.class = "Gimp",           .isfloating = 1,    .iscentered = 1)
-	RULE(.class = "Brave",          .tags = 1 << 0,     .monitor = 0)
-	RULE(.class = "discord",        .tags = 1 << 2,     .monitor = 2,   .switchtag = 1)
-	RULE(.class = "lyx",            .tags = 1 << 4,     .monitor = 1,   .switchtag = 1)
-	RULE(.class = "Virt-manager",   .tags = 1 << 6,     .monitor = 2,   .switchtag = 1)
-	RULE(.class = "Steam",          .tags = 1 << 5,     .monitor = 1,   .isfloating = 1,    .iscentered = 1,   .switchtag = 1)
-	RULE(.class = "Lutris",          .tags = 1 << 5,    .monitor = 1,   .isfloating = 1,    .iscentered = 1,   .switchtag = 1)
+	RULE(.class = "Brave",          .tags = 1 << 0,     .monitor = 2)
+	RULE(.class = "discord",        .tags = 1 << 2,     .monitor = 1,   .switchtag = 1)
+	RULE(.class = "lyx",            .tags = 1 << 4,     .monitor = 0,   .switchtag = 1)
+	RULE(.class = "Virt-manager",   .tags = 1 << 6,     .monitor = 1,   .switchtag = 1)
+	RULE(.class = "Steam",          .tags = 1 << 5,     .monitor = 0,   .isfloating = 1,    .iscentered = 1,   .switchtag = 1)
+	RULE(.class = "Lutris",          .tags = 1 << 5,    .monitor = 0,   .isfloating = 1,    .iscentered = 1,   .switchtag = 1)
 
     // Games
-	RULE(.class = "Battle.net.exe", .tags = 1 << 7,     .monitor = 1,   .isfloating = 1,    .iscentered = 1)
-	RULE(.class = "explorer.exe",   .tags = 1 << 7,     .monitor = 1,   .isfloating = 1,    .iscentered = 1)
-	RULE(.class = "Star Citizen",   .tags = 1 << 7,     .monitor = 1,   .isfloating = 1,    .iscentered = 1)
+	RULE(.class = "Battle.net.exe", .tags = 1 << 7,     .monitor = 0,   .isfloating = 1,    .iscentered = 1)
+	RULE(.class = "explorer.exe",   .tags = 1 << 7,     .monitor = 0,   .isfloating = 1,    .iscentered = 1)
+	RULE(.class = "Star Citizen",   .tags = 1 << 7,     .monitor = 0,   .isfloating = 1,    .iscentered = 1)
     
     // Scratchpads
 	RULE(.instance = "spterm",      .tags = SPTAG(0), .isfloating = 1)
