@@ -150,7 +150,7 @@ static const BarRule barrules[] = {
     // Win title
 	{ -1,       0,     BAR_ALIGN_NONE,   width_wintitle,          draw_wintitle,          click_wintitle,          "wintitle" },
     // Powerline on extrabar
-	{ 'A',      1,     BAR_ALIGN_RIGHT,  width_pwrl_status_es,    draw_pwrl_status_es,    click_pwrl_status,       "powerline_status" },
+	{ 'A',      1,     BAR_ALIGN_LEFT,  width_pwrl_status_es,    draw_pwrl_status_es,    click_pwrl_status,       "powerline_status" },
 };
 
 /* layout(s) */
