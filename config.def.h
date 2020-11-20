@@ -34,6 +34,7 @@ static char norm_cyan[]                  = "#f39660";
 static char norm_white[]                 = "#e2e2e3";
 
 static char norm_bar[]                   = "#f5dac5"; //Bar color for transparancy
+static char norm_dark[]                  = "#2c2e34"; //Dark bg for use in dmenu
 
 static char *colors[][ColCount] = {
         /*                       fg                bg             border          float */
@@ -182,10 +183,10 @@ static const char *dmenucmd[] = {
 	"dmenu_run",
 	"-m", dmenumon,
 	"-fn", dmenufont,
-	"-nb", norm_white,
-	"-nf", norm_black,
+	"-nb", norm_dark,
+	"-nf", norm_white,
 	"-sb", norm_green,
-	"-sf", norm_white,
+	"-sf", norm_black,
 	NULL
 };
 static const char *termcmd[]  = { "st", NULL };
