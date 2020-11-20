@@ -3,10 +3,10 @@
 /* appearance */
 static const unsigned int borderpx       = 1;   /* border pixel of windows */
 static const unsigned int snap           = 32;  /* snap pixel */
-static const unsigned int gappih         = 20;  /* horiz inner gap between windows */
-static const unsigned int gappiv         = 10;  /* vert inner gap between windows */
-static const unsigned int gappoh         = 10;  /* horiz outer gap between windows and screen edge */
-static const unsigned int gappov         = 30;  /* vert outer gap between windows and screen edge */
+static const unsigned int gappih         = 19;  /* horiz inner gap between windows */
+static const unsigned int gappiv         = 19;  /* vert inner gap between windows */
+static const unsigned int gappoh         = 19;  /* horiz outer gap between windows and screen edge */
+static const unsigned int gappov         = 19;  /* vert outer gap between windows and screen edge */
 static const int smartgaps               = 0;   /* 1 means no outer gap when there is only one window */
 static const int showbar                 = 1;   /* 0 means no bar */
 static const int topbar                  = 1;   /* 0 means bottom bar */
@@ -36,7 +36,7 @@ static char norm_white[]                 = "#e2e2e3";
 static char norm_bar[]                   = "#f5dac5"; //Bar color for transparancy
 
 static char *colors[][ColCount] = {
-        /*                       fg                bg                border                float */
+        /*                       fg                bg             border          float */
     [SchemeNorm]         = { norm_black,        norm_bar,       norm_black,     norm_black  },
     [SchemeSel]          = { norm_white,        norm_red,       norm_black,     norm_black  },
     [SchemeTitleNorm]    = { norm_bar,          norm_bar,       norm_black,     norm_black  },
@@ -48,7 +48,7 @@ static char *colors[][ColCount] = {
 };
 
 static char *statuscolors[][ColCount] = {
-        /*                       fg                bg                border                float */
+    /*  fg                bg             border          float */
     { norm_black,       norm_bar,       norm_bar,       norm_bar         },
     { norm_black,       norm_black,     norm_black,     norm_bar         },
     { norm_black,       norm_red,       norm_red,       norm_red         },
@@ -74,7 +74,7 @@ static Sp scratchpads[] = {
 };
 
 static char *tagicons[][NUMTAGS] = {
-	[DEFAULT_TAGS]        = { "", "", "", "", "", "", "", "", "" },
+	[DEFAULT_TAGS]        = { "", "", "ﭮ", "", "", "", "", "", "" },
 	[ALTERNATIVE_TAGS]    = { "A", "B", "C", "D", "E", "F", "G", "H", "I" },
 	[ALT_TAGS_DECORATION] = { "<1>", "<2>", "<3>", "<4>", "<5>", "<6>", "<7>", "<8>", "<9>" },
 };
