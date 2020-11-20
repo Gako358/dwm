@@ -129,6 +129,7 @@ enum {
 
 enum {
 	SchemeNorm,
+    /* SchemeBottom, */
 	SchemeSel,
 	SchemeTitleNorm,
 	SchemeTitleSel,
@@ -1661,6 +1662,12 @@ drawbarwin(Bar *bar)
 	rx = lx = bar->borderpx;
 
 	drw_setscheme(drw, scheme[SchemeNorm]);
+    // Uncomment if using extrabar!
+    /* if (bar->topbar) */
+	    /* drw_setscheme(drw, scheme[SchemeNorm]); */
+    /* else { */  
+    /*     drw_setscheme(drw, scheme[SchemeBottom]); */
+    /* } */
 	drw_rect(drw, lx, bar->borderpx, lw, bar->bh - 2 * bar->borderpx, 1, 1);
 	for (r = 0; r < LENGTH(barrules); r++) {
 		br = &barrules[r];

@@ -44,6 +44,7 @@ static char *colors[][ColCount] = {
     [SchemeTitleSel]     = { norm_bar,          norm_bar,       norm_black,     norm_black  },
     [SchemeTagsNorm]     = { norm_black,        norm_bar,       norm_black,     norm_black  },
     [SchemeTagsSel]      = { norm_black,        norm_bar,       norm_black,     norm_black  },
+    /* [SchemeBottom]       = { norm_black,        norm_black,     norm_black,     norm_black  }, */
     /* [SchemeHid]          = { hidfgcolor,       hidbgcolor,       hidbordercolor,       hidfloatcolor  }, */
     /* [SchemeUrg]          = { urgfgcolor,       urgbgcolor,       urgbordercolor,       urgfloatcolor  }, */                         
 };
@@ -150,7 +151,8 @@ static const BarRule barrules[] = {
     // Win title
 	{ -1,       0,     BAR_ALIGN_NONE,   width_wintitle,          draw_wintitle,          click_wintitle,          "wintitle" },
     // Powerline on extrabar
-	{ 'A',      1,     BAR_ALIGN_LEFT,  width_pwrl_status_es,    draw_pwrl_status_es,    click_pwrl_status,       "powerline_status" },
+    // NB! NEED TO HAVE THE EXTRABAR SET TO 1
+	/* { 'A',      1,     BAR_ALIGN_RIGHT,  width_pwrl_status_es,    draw_pwrl_status_es,    click_pwrl_status,       "powerline_status" }, */
 };
 
 /* layout(s) */

@@ -233,7 +233,7 @@
  * renamed to more accurately reflect what it does - creating an extra status.
  * https://dwm.suckless.org/patches/extrabar/
  */
-#define BAR_EXTRASTATUS_PATCH 1
+#define BAR_EXTRASTATUS_PATCH 0
 
 /* Adds EWMH support for _NET_NUMBER_OF_DESKTOPS, _NET_CURRENT_DESKTOP, _NET_DESKTOP_NAMES
  * and _NET_DESKTOP_VIEWPORT, which allows for compatibility with other bars and programs
