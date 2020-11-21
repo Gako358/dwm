@@ -951,10 +951,10 @@ static Key keys[] = {
 	{ MODKEY,                       XK_grave,      togglescratch,          {.ui = 0 } },
 	{ MODKEY|ControlMask,           XK_grave,      setscratch,             {.ui = 0 } },
 	{ MODKEY|ShiftMask,             XK_grave,      removescratch,          {.ui = 0 } },
-	{ Mod1Mask,                     XK_1,          togglescratch,          {.ui = 1 } },
-	{ Mod1Mask,                     XK_2,          togglescratch,          {.ui = 2 } },
-	{ Mod1Mask,                     XK_3,          togglescratch,          {.ui = 3 } },
-	{ Mod1Mask,                     XK_4,          togglescratch,          {.ui = 4 } },
+	{ Mod1Mask,                     XK_n,          togglescratch,          {.ui = 1 } },
+	{ Mod1Mask,                     XK_m,          togglescratch,          {.ui = 2 } },
+	{ Mod1Mask,                     XK_c,          togglescratch,          {.ui = 3 } },
+	{ Mod1Mask,                     XK_b,          togglescratch,          {.ui = 4 } },
 	#endif // SCRATCHPADS_PATCH
 	#if UNFLOATVISIBLE_PATCH
 	{ MODKEY|Mod1Mask,              XK_space,      unfloatvisible,         {0} },
