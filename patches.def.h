@@ -176,7 +176,11 @@
  * sole purpose of providing visual aid.
  * https://dwm.suckless.org/patches/alternativetags/
  */
+<<<<<<< HEAD
 #define BAR_ALTERNATIVE_TAGS_PATCH 0
+=======
+#define BAR_ALTERNATIVE_TAGS_PATCH 1
+>>>>>>> develop
 
 /* This patches provides the ability to use alternative text for tags which contain at
  * least one window.
@@ -233,7 +237,11 @@
  * renamed to more accurately reflect what it does - creating an extra status.
  * https://dwm.suckless.org/patches/extrabar/
  */
+<<<<<<< HEAD
 #define BAR_EXTRASTATUS_PATCH 0
+=======
+#define BAR_EXTRASTATUS_PATCH 1
+>>>>>>> develop
 
 /* Adds EWMH support for _NET_NUMBER_OF_DESKTOPS, _NET_CURRENT_DESKTOP, _NET_DESKTOP_NAMES
  * and _NET_DESKTOP_VIEWPORT, which allows for compatibility with other bars and programs
@@ -298,7 +306,11 @@
  * https://lists.suckless.org/hackers/2004/17285.html
  * https://dwm.suckless.org/patches/pango/
  */
+<<<<<<< HEAD
 #define BAR_PANGO_PATCH 0
+=======
+#define BAR_PANGO_PATCH 1
+>>>>>>> develop
 
 /* This patch enables colored text in the status bar. It changes the way colors are defined
  * in config.h allowing multiple color combinations for use in the status script.
@@ -642,7 +654,11 @@
 /* This patch allows you to move clients around in the stack and swap them with the master.
  * https://dwm.suckless.org/patches/movestack/
  */
+<<<<<<< HEAD
 #define MOVESTACK_PATCH 0
+=======
+#define MOVESTACK_PATCH 1
+>>>>>>> develop
 
 /* Adds support for the _NET_CLIENT_LIST_STACKING atom, needed by certain applications like the
  * Zoom video conferencing application.
@@ -715,7 +731,11 @@
 /* This patch provides a way to move clients up and down inside the client list.
  * https://dwm.suckless.org/patches/push/
  */
+<<<<<<< HEAD
 #define PUSH_PATCH 0
+=======
+#define PUSH_PATCH 1
+>>>>>>> develop
 
 /* This patch provides a way to move clients up and down inside the client list,
  * but does not push up or down into the master area (except that it does not take
@@ -1022,7 +1042,11 @@
 /* Follow a window to the tag it is being moved to.
  * https://dwm.suckless.org/patches/viewontag/
  */
+<<<<<<< HEAD
 #define VIEWONTAG_PATCH 0
+=======
+#define VIEWONTAG_PATCH 1
+>>>>>>> develop
 
 /* By default tags can be changed using MOD+<num> while MOD+Tab toggles between the current and
  * the previous tag. This patch changes this so that if you hit MOD+<num> for the tag you are
@@ -1087,7 +1111,11 @@
 /* Centered master layout.
  * https://dwm.suckless.org/patches/centeredmaster/
  */
+<<<<<<< HEAD
 #define CENTEREDMASTER_LAYOUT 1
+=======
+#define CENTEREDMASTER_LAYOUT 0
+>>>>>>> develop
 
 /* Centered floating master layout.
  * https://dwm.suckless.org/patches/centeredmaster/
