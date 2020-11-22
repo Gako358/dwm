@@ -737,10 +737,10 @@ static const char *dmenucmd[] = {
 	"-m", dmenumon,
 	#endif // NODMENU_PATCH
 	"-fn", dmenufont,
-	"-nb", COL_DARK,
+	"-nb", COL_BLACK,
 	"-nf", COL_WHITE,
 	"-sb", COL_GREEN,
-	"-sf", COL_BLACK,
+	"-sf", COL_DARK,
 	#if BAR_DMENUMATCHTOP_PATCH
 	topbar ? NULL : "-b",
 	#endif // BAR_DMENUMATCHTOP_PATCH
