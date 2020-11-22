@@ -954,7 +954,7 @@ static Key keys[] = {
 	{ Mod1Mask,                     XK_n,          togglescratch,          {.ui = 1 } },
 	{ Mod1Mask,                     XK_m,          togglescratch,          {.ui = 2 } },
 	{ Mod1Mask,                     XK_c,          togglescratch,          {.ui = 3 } },
-	{ Mod1Mask,                     XK_b,          togglescratch,          {.ui = 4 } },
+	{ Mod1Mask,                     XK_s,          togglescratch,          {.ui = 4 } },
 	#endif // SCRATCHPADS_PATCH
 	#if UNFLOATVISIBLE_PATCH
 	{ MODKEY|Mod1Mask,              XK_space,      unfloatvisible,         {0} },
