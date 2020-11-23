@@ -1022,7 +1022,7 @@
 /* Follow a window to the tag it is being moved to.
  * https://dwm.suckless.org/patches/viewontag/
  */
-#define VIEWONTAG_PATCH 1
+#define VIEWONTAG_PATCH 0
 
 /* By default tags can be changed using MOD+<num> while MOD+Tab toggles between the current and
  * the previous tag. This patch changes this so that if you hit MOD+<num> for the tag you are
