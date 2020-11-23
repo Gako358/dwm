@@ -747,7 +747,7 @@ static const char *dmenucmd[] = {
 	NULL
 };
 static const char *termcmd[]  = { "st", NULL };
-static const char *cmdprintscreen[]  = { "scrot", "-d 3", "%Y-%m-%d-%s_$wx$h.jpg", "-e 'mv $f ~/Pictures/screenshots/'", NULL  };
+static const char *cmdprintscreen[]  = { "scrot", "-d 3", "%Y-%m-%d-%s_$wx$h.jpg", "-e 'mv $f ~/Pictures/Screenshots/'", NULL  };
 
 #if BAR_STATUSCMD_PATCH && !BAR_DWMBLOCKS_PATCH
 /* commands spawned when clicking statusbar, the mouse button pressed is exported as BUTTON */
