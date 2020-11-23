@@ -747,6 +747,7 @@ static const char *dmenucmd[] = {
 	NULL
 };
 static const char *termcmd[]  = { "st", NULL };
+static const char *cmdprintscreen[]  = { "scrot", "-d 3", "%Y-%m-%d-%s_$wx$h.jpg", "-e 'mv $f ~/Pictures/screenshots/'", NULL  };
 
 #if BAR_STATUSCMD_PATCH && !BAR_DWMBLOCKS_PATCH
 /* commands spawned when clicking statusbar, the mouse button pressed is exported as BUTTON */
@@ -769,6 +770,7 @@ static Key keys[] = {
 	#endif // KEYMODES_PATCH
 	{ MODKEY,                       XK_w,          spawn,                  {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return,     spawn,                  {.v = termcmd } },
+	{ MODKEY,                       XK_p,          spawn,                  {.v = cmdprintscreen } },
 	{ MODKEY,                       XK_b,          togglebar,              {0} },
 	#if FOCUSMASTER_PATCH
 	{ MODKEY|ControlMask,           XK_space,      focusmaster,            {0} },
