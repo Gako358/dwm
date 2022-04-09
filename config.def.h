@@ -11,10 +11,10 @@ static const int smartgaps          = 0;        /* 1 means no outer gap when the
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const int usealtbar          = 1;        /* 1 means use non-dwm status bar */
-static const char *altbarclass      = "Polybar"; /* Alternate bar class name */
-static const char *altbarcmd        = "$HOME/bar.sh"; /* Alternate bar launch command */
-static const char font[]            = "monospace 10";
-static const char dmenufont[]       = "monospace:size=10";
+static const char *altbarclass      = "eww"; /* Alternate bar class name */
+static const char *altbarcmd        = "$HOME/.config/eww/launch_bar"; /* Alternate bar launch command */
+static const char font[]            = "JetBrainsMono Nerd Font:size=13:antialias=true:autohint=true";
+static const char dmenufont[]       = "JetBrainsMono Nerd Font:size=12:antialias=true:autohint=true";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
