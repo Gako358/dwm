@@ -167,10 +167,11 @@ static Key keys[] = {
     {MODKEY,                            XK_u,       spawn,
         SHCMD("maim --select | xclip -selection clipboard -t image/png")},
 
-
+    // Apps
     { MODKEY,                           XK_c,       spawn,          SHCMD("rofi -show drun") },
     { MODKEY,                           XK_Return,  spawn,          SHCMD("st")},
     { MODKEY,                           XK_w,       spawn,          SHCMD("pcmanfm") },
+    { MODKEY|ShiftMask,                 XK_l,       spawn,          SHCMD("st -e slock") },
 
     // scratchpads
 	{ MODKEY,            			    XK_grave,  togglescratch,  {.ui = 0 } },
