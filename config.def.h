@@ -56,14 +56,18 @@ typedef struct {
 	const char *name;
 	const void *cmd;
 } Sp;
-const char *spcmd1[] = {"st", "-n", "spterm", "-g", "120x34", NULL };
-const char *spcmd2[] = {"st", "-n", "spfm", "-g", "144x41", "-e", "ranger", NULL };
-const char *spcmd3[] = {"keepassxc", NULL };
+const char *spcmd1[] = {"st", "-n", "spterm", "-g", "370x91", NULL };
+const char *spcmd2[] = {"st", "-n", "ncmpcpp", "-g", "120x35", "-e", "ncmpcpp", NULL };
+const char *spcmd3[] = {"st", "-n", "mutt", "-g", "370x91", "-e", "neomutt", NULL };
+const char *spcmd4[] = {"st", "-n", "htop", "-g", "370x91", "-e", "btm", NULL };
+const char *spcmd5[] = {"st", "-n", "weechat", "-g", "370x91", "-e", "weechat", NULL };
 static Sp scratchpads[] = {
 	/* name          cmd  */
 	{"spterm",      spcmd1},
-	{"spranger",    spcmd2},
-	{"keepassxc",   spcmd3},
+	{"ncmpcpp",     spcmd2},
+	{"mutt",        spcmd3},
+    {"htop",        spcmd4},
+    {"weechat",     spcmd5},
 };
 
 /* tagging */
@@ -92,15 +96,19 @@ static const Rule rules[] = {
      */
     /* class      instance    title       tags mask     iscentered   isfloating   monitor */
     { "Gimp",     NULL,       NULL,       0,            0,           1,           -1 },
-    { "Firefox",  NULL,       NULL,       1 << 8,       0,           0,           -1 },
+    { "Firefox",  NULL,       NULL,       1,            0,           0,           -1 },
+    { "discord",  NULL,       NULL,       1 << 4,       0,           0,           -1 },
     { "eww",      NULL,       NULL,       0,            0,           1,           -1 },
-	{ NULL,		  "spterm",		NULL,		SPTAG(0),		1,			 -1 },
-	{ NULL,		  "spfm",		NULL,		SPTAG(1),		1,			 -1 },
-	{ NULL,		  "keepassxc",	NULL,		SPTAG(2),		0,			 -1 },
+    { "Pcmanfm",  NULL,       NULL,       0,            0,           1,           -1 },
+	{ NULL,		  "spterm",		NULL,		SPTAG(0),		0,      1,			 -1 },
+	{ NULL,		  "ncmpcpp",	NULL,		SPTAG(1),		0,      1,			 -1 },
+	{ NULL,		  "mutt",	    NULL,		SPTAG(2),		0,      1,			 -1 },
+    { NULL,		  "htop",	    NULL,		SPTAG(3),		0,      1,			 -1 },
+    { NULL,		  "weechat",	NULL,		SPTAG(4),		0,      1,			 -1 },
 };
 
 /* layout(s) */
-static const float mfact     = 0.50; /* factor of master area size [0.05..0.95] */
+static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
 static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
@@ -143,9 +151,13 @@ static Key keys[] = {
     /* modifier                         key         function        argument */
 
     // brightness and audio
-    {0,                     XF86XK_AudioMute,       spawn,          SHCMD("pamixer -t")},
-    {0,              XF86XK_AudioRaiseVolume,       spawn,          SHCMD("pamixer -i 5")},
-    {0,              XF86XK_AudioLowerVolume,       spawn,          SHCMD("pamixer -d 5")},
+    {0,                     XF86XK_AudioMute,       spawn,          SHCMD("amixer -D pulse set Master 1+ toggle")},
+    {0,                     XF86XK_AudioNext,       spawn,          SHCMD("mpc next")},
+    {0,                     XF86XK_AudioPrev,       spawn,          SHCMD("mpc prev")},
+    {0,                     XF86XK_AudioPlay,       spawn,          SHCMD("mpc play")},
+    {0,                     XF86XK_AudioStop,       spawn,          SHCMD("mpc pause")},
+    {0,              XF86XK_AudioRaiseVolume,       spawn,          SHCMD("amixer -D pulse sset Master 5%+")},
+    {0,              XF86XK_AudioLowerVolume,       spawn,          SHCMD("amixer -D pulse sset Master 5%-")},
     {0,              XF86XK_MonBrightnessDown,      spawn,          SHCMD("xbacklight -dec 5")},
     {0,              XF86XK_MonBrightnessUp,        spawn,          SHCMD("xbacklight -inc 5")},
 
@@ -157,13 +169,15 @@ static Key keys[] = {
 
 
     { MODKEY,                           XK_c,       spawn,          SHCMD("rofi -show drun") },
-    { MODKEY,                           XK_Return,  spawn,          SHCMD("kitty")},
-    // { MODKEY,                           XK_Return, spawn,            SHCMD("st_pad && st")},
+    { MODKEY,                           XK_Return,  spawn,          SHCMD("st")},
+    { MODKEY,                           XK_w,       spawn,          SHCMD("pcmanfm") },
 
+    // scratchpads
 	{ MODKEY,            			    XK_grave,  togglescratch,  {.ui = 0 } },
-	{ MODKEY,            			    XK_u,	   togglescratch,  {.ui = 1 } },
-	{ MODKEY,            			    XK_x,	   togglescratch,  {.ui = 2 } },
-
+	{ MODKEY|ShiftMask,            		XK_n,	   togglescratch,  {.ui = 1 } },
+	{ MODKEY|ShiftMask,            	    XK_m,	   togglescratch,  {.ui = 2 } },
+    { MODKEY|ShiftMask,            	    XK_b,	   togglescratch,  {.ui = 3 } },
+    { MODKEY|ShiftMask,            	    XK_c,	   togglescratch,  {.ui = 4 } },
 
     // toggle stuff
     { MODKEY,                           XK_b,       togglebar,      {0} },
