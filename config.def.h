@@ -28,7 +28,7 @@ static const int scalepreview       = 4;
 static const int tag_preview        = 0;        /* 1 means enable, 0 is off */
 static const int colorfultag        = 1;        /* 0 means use SchemeSel for selected non vacant tag */
 
-static const char *fonts[]          = { "JetBrainsMono Nerd Font:style:medium:size=10",
+static const char *fonts[]          = { "JetBrainsMono Nerd Font:style:medium:size=13",
                                         "Material Design Icons-Regular:size=10" };
 
 // theme
@@ -50,6 +50,20 @@ static const char *colors[][3]      = {
     [SchemeBtnPrev]    = { green,   black,  black },
     [SchemeBtnNext]    = { yellow,  black,  black },
     [SchemeBtnClose]   = { red,     black,  black },
+};
+
+typedef struct {
+	const char *name;
+	const void *cmd;
+} Sp;
+const char *spcmd1[] = {"st", "-n", "spterm", "-g", "120x34", NULL };
+const char *spcmd2[] = {"st", "-n", "spfm", "-g", "144x41", "-e", "ranger", NULL };
+const char *spcmd3[] = {"keepassxc", NULL };
+static Sp scratchpads[] = {
+	/* name          cmd  */
+	{"spterm",      spcmd1},
+	{"spranger",    spcmd2},
+	{"keepassxc",   spcmd3},
 };
 
 /* tagging */
@@ -80,6 +94,9 @@ static const Rule rules[] = {
     { "Gimp",     NULL,       NULL,       0,            0,           1,           -1 },
     { "Firefox",  NULL,       NULL,       1 << 8,       0,           0,           -1 },
     { "eww",      NULL,       NULL,       0,            0,           1,           -1 },
+	{ NULL,		  "spterm",		NULL,		SPTAG(0),		1,			 -1 },
+	{ NULL,		  "spfm",		NULL,		SPTAG(1),		1,			 -1 },
+	{ NULL,		  "keepassxc",	NULL,		SPTAG(2),		0,			 -1 },
 };
 
 /* layout(s) */
@@ -122,7 +139,6 @@ static const Layout layouts[] = {
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
-
 static Key keys[] = {
     /* modifier                         key         function        argument */
 
@@ -143,6 +159,10 @@ static Key keys[] = {
     { MODKEY,                           XK_c,       spawn,          SHCMD("rofi -show drun") },
     { MODKEY,                           XK_Return,  spawn,          SHCMD("kitty")},
     // { MODKEY,                           XK_Return, spawn,            SHCMD("st_pad && st")},
+
+	{ MODKEY,            			    XK_grave,  togglescratch,  {.ui = 0 } },
+	{ MODKEY,            			    XK_u,	   togglescratch,  {.ui = 1 } },
+	{ MODKEY,            			    XK_x,	   togglescratch,  {.ui = 2 } },
 
 
     // toggle stuff

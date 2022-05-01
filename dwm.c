@@ -26,6 +26,7 @@
 #include <X11/Xutil.h>
 #include <X11/cursorfont.h>
 #include <X11/keysym.h>
+#include <assert.h>
 #include <errno.h>
 #include <locale.h>
 #include <signal.h>
@@ -36,6 +37,8 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <unistd.h>
+#include <libgen.h>
+#include <sys/stat.h>
 #ifdef XINERAMA
 #include <X11/extensions/Xinerama.h>
 #endif /* XINERAMA */
@@ -61,7 +64,10 @@
 #define MOUSEMASK (BUTTONMASK | PointerMotionMask)
 #define WIDTH(X) ((X)->w + 2 * (X)->bw)
 #define HEIGHT(X) ((X)->h + 2 * (X)->bw)
-#define TAGMASK ((1 << LENGTH(tags)) - 1)
+#define NUMTAGS					(LENGTH(tags) + LENGTH(scratchpads))
+#define TAGMASK     			((1 << NUMTAGS) - 1)
+#define SPTAG(i) 				((1 << LENGTH(tags)) << (i))
+#define SPTAGMASK   			(((1 << LENGTH(scratchpads))-1) << LENGTH(tags))
 #define TAGSLENGTH              (LENGTH(tags))
 #define TEXTW(X) (drw_fontset_getwidth(drw, (X)) + lrpad)
 #define MAXTABS 50
@@ -324,6 +330,7 @@ static void tag(const Arg *arg);
 static void tagmon(const Arg *arg);
 static void togglebar(const Arg *arg);
 static void togglefloating(const Arg *arg);
+static void togglescratch(const Arg *arg);
 static void togglefullscr(const Arg *arg);
 static void toggletag(const Arg *arg);
 static void toggleview(const Arg *arg);
@@ -478,6 +485,10 @@ void applyrules(Client *c) {
       c->iscentered = r->iscentered;
       c->isfloating = r->isfloating;
       c->tags |= r->tags;
+	  if ((r->tags & SPTAGMASK) && r->isfloating) {
+	  	c->x = c->mon->wx + (c->mon->ww / 2 - WIDTH(c) / 2);
+	  	c->y = c->mon->wy + (c->mon->wh / 2 - HEIGHT(c) / 2);
+	  }
       for (m = mons; m && m->num != r->monitor; m = m->next)
         ;
       if (m)
@@ -488,8 +499,8 @@ void applyrules(Client *c) {
     XFree(ch.res_class);
   if (ch.res_name)
     XFree(ch.res_name);
-  c->tags =
-      c->tags & TAGMASK ? c->tags & TAGMASK : c->mon->tagset[c->mon->seltags];
+	c->tags =
+        c->tags & TAGMASK ? c->tags & TAGMASK : (c->mon->tagset[c->mon->seltags] & ~SPTAGMASK);
 }
 
 int applysizehints(Client *c, int *x, int *y, int *w, int *h, int interact) {
@@ -1709,6 +1720,32 @@ void focusstack(const Arg *arg) {
 }
 
 void
+togglescratch(const Arg *arg)
+{
+	Client *c;
+	unsigned int found = 0;
+	unsigned int scratchtag = SPTAG(arg->ui);
+	Arg sparg = {.v = scratchpads[arg->ui].cmd};
+
+	for (c = selmon->clients; c && !(found = c->tags & scratchtag); c = c->next);
+	if (found) {
+		unsigned int newtagset = selmon->tagset[selmon->seltags] ^ scratchtag;
+		if (newtagset) {
+			selmon->tagset[selmon->seltags] = newtagset;
+			focus(NULL);
+			arrange(selmon);
+		}
+		if (ISVISIBLE(c)) {
+			focus(c);
+			restack(selmon);
+		}
+	} else {
+		selmon->tagset[selmon->seltags] |= scratchtag;
+		spawn(&sparg);
+	}
+}
+
+void
 focuswin(const Arg* arg){
 	int iwin = arg->i;
 	Client* c = NULL;
@@ -2876,6 +2913,10 @@ void showhide(Client *c) {
   if (!c)
     return;
   if (ISVISIBLE(c)) {
+    if ((c->tags & SPTAGMASK) && c->isfloating) {
+        c->x = c->mon->wx + (c->mon->ww / 2 - WIDTH(c) / 2);
+        c->y = c->mon->wy + (c->mon->wh / 2 - HEIGHT(c) / 2);
+    }
     /* show clients top down */
     XMoveWindow(dpy, c->win, c->x, c->y);
     if ((!c->mon->lt[c->mon->sellt]->arrange || c->isfloating) &&
@@ -2924,10 +2965,41 @@ void sigterm(int unused) {
   quit(&a);
 }
 
+#define SPAWN_CWD_DELIM " []{}()<>\"':"
+
 void spawn(const Arg *arg) {
   if (fork() == 0) {
     if (dpy)
       close(ConnectionNumber(dpy));
+	if(selmon->sel) {
+		const char* const home = getenv("HOME");
+		assert(home && strchr(home, '/'));
+		const size_t homelen = strlen(home);
+		char *cwd, *pathbuf = NULL;
+		struct stat statbuf;
+
+		cwd = strtok(selmon->sel->name, SPAWN_CWD_DELIM);
+		/* NOTE: strtok() alters selmon->sel->name in-place,
+		 * but that does not matter because we are going to
+		 * exec() below anyway; nothing else will use it */
+		while(cwd) {
+			if(*cwd == '~') { /* replace ~ with $HOME */
+				if(!(pathbuf = malloc(homelen + strlen(cwd)))) /* ~ counts for NULL term */
+					die("fatal: could not malloc() %u bytes\n", homelen + strlen(cwd));
+				strcpy(strcpy(pathbuf, home) + homelen, cwd + 1);
+				cwd = pathbuf;
+			}
+			if(strchr(cwd, '/') && !stat(cwd, &statbuf)) {
+				if(!S_ISDIR(statbuf.st_mode))
+					cwd = dirname(cwd);
+
+				if(!chdir(cwd))
+					break;
+			}
+			cwd = strtok(NULL, SPAWN_CWD_DELIM);
+		}
+		free(pathbuf);
+	}
     setsid();
     execvp(((char **)arg->v)[0], (char **)arg->v);
     fprintf(stderr, "dwm: execvp %s", ((char **)arg->v)[0]);
