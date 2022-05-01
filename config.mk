@@ -1,5 +1,5 @@
 # dwm version
-VERSION = 6.3
+VERSION = 6.2
 
 # Customize below to fit your system
 
@@ -20,13 +20,9 @@ FREETYPEINC = /usr/include/freetype2
 # OpenBSD (uncomment)
 #FREETYPEINC = ${X11INC}/freetype2
 
-# yajl
-YAJLLIBS = -lyajl
-YAJLINC = /usr/include/yajl
-
 # includes and libs
-INCS = -I${X11INC} -I${FREETYPEINC} `pkg-config --cflags xft pango pangoxft` -I${YAJLINC}
-LIBS = -L${X11LIB} -lX11 ${XINERAMALIBS} -lmpdclient ${FREETYPELIBS} `pkg-config --libs xft pango pangoxft` ${YAJLLIBS}
+INCS = -I${X11INC} -I${FREETYPEINC}
+LIBS = -L${X11LIB} -lX11 ${XINERAMALIBS} ${FREETYPELIBS} -lImlib2
 
 # flags
 CPPFLAGS = -D_DEFAULT_SOURCE -D_BSD_SOURCE -D_POSIX_C_SOURCE=200809L -DVERSION=\"${VERSION}\" ${XINERAMAFLAGS}
