@@ -173,6 +173,10 @@ static Key keys[] = {
     { MODKEY,                           XK_w,       spawn,          SHCMD("pcmanfm") },
     { MODKEY|ShiftMask,                 XK_l,       spawn,          SHCMD("st -e slock") },
 
+    // Languages
+    { MODKEY|ControlMask|ShiftMask,     XK_n,       spawn,          SHCMD("setxkbmap -layout no") },
+    { MODKEY|ControlMask|ShiftMask,     XK_u,       spawn,          SHCMD("setxkbmap -layout us") },
+
     // scratchpads
 	{ MODKEY,            			    XK_grave,  togglescratch,  {.ui = 0 } },
 	{ MODKEY|ShiftMask,            		XK_n,	   togglescratch,  {.ui = 1 } },
