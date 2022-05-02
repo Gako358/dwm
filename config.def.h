@@ -71,7 +71,7 @@ static Sp scratchpads[] = {
 };
 
 /* tagging */
-static char *tags[] = {"", "", "", "", ""};
+static char *tags[] = {"", "", "", "", ""};
 
 static const char* eww[] = { "eww", "open" , "eww", NULL };
 
