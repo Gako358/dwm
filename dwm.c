@@ -2971,7 +2971,7 @@ void spawn(const Arg *arg) {
   if (fork() == 0) {
     if (dpy)
       close(ConnectionNumber(dpy));
-	if(selmon->sel) {
+    if(selmon->sel) {
 		const char* const home = getenv("HOME");
 		assert(home && strchr(home, '/'));
 		const size_t homelen = strlen(home);
@@ -2992,14 +2992,13 @@ void spawn(const Arg *arg) {
 			if(strchr(cwd, '/') && !stat(cwd, &statbuf)) {
 				if(!S_ISDIR(statbuf.st_mode))
 					cwd = dirname(cwd);
-
 				if(!chdir(cwd))
 					break;
 			}
 			cwd = strtok(NULL, SPAWN_CWD_DELIM);
 		}
 		free(pathbuf);
-	}
+    }
     setsid();
     execvp(((char **)arg->v)[0], (char **)arg->v);
     fprintf(stderr, "dwm: execvp %s", ((char **)arg->v)[0]);
