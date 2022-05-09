@@ -100,6 +100,7 @@ static const Rule rules[] = {
     { "discord",  NULL,       NULL,       1 << 4,       0,           0,           -1 },
     { "eww",      NULL,       NULL,       0,            0,           1,           -1 },
     { "Pcmanfm",  NULL,       NULL,       0,            0,           1,           -1 },
+    { "Zathura",  NULL,       NULL,       0,            0,           1,           -1 },
 	{ NULL,		  "spterm",		NULL,		SPTAG(0),		0,      1,			 -1 },
 	{ NULL,		  "ncmpcpp",	NULL,		SPTAG(1),		0,      1,			 -1 },
 	{ NULL,		  "mutt",	    NULL,		SPTAG(2),		0,      1,			 -1 },
