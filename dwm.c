@@ -2972,8 +2972,8 @@ void spawn(const Arg *arg) {
     if (dpy)
       close(ConnectionNumber(dpy));
     if(selmon->sel) {
-		const char* const home = getenv("HOME");
-		assert(home && strchr(home, '/'));
+        const char* const home = getenv("HOME");
+        assert(home && strchr(home, '/'));
 		const size_t homelen = strlen(home);
 		char *cwd, *pathbuf = NULL;
 		struct stat statbuf;
@@ -2998,7 +2998,7 @@ void spawn(const Arg *arg) {
 			cwd = strtok(NULL, SPAWN_CWD_DELIM);
 		}
 		free(pathbuf);
-    }
+	}
     setsid();
     execvp(((char **)arg->v)[0], (char **)arg->v);
     fprintf(stderr, "dwm: execvp %s", ((char **)arg->v)[0]);
