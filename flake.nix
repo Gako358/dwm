@@ -9,6 +9,9 @@
       overlay = final: prev: {
         dwm = prev.dwm.overrideAttrs (old: {
 	  src = builtins.path { path = ./.; name = "dwm"; };
+	  buildInputs = old.builtInputs ++ [
+	    imlib2
+	  ];
 	});
       };
     in
