@@ -157,8 +157,8 @@ static Key keys[] = {
     {0,                     XF86XK_AudioPrev,       spawn,          SHCMD("mpc prev")},
     {0,                     XF86XK_AudioPlay,       spawn,          SHCMD("mpc play")},
     {0,                     XF86XK_AudioStop,       spawn,          SHCMD("mpc pause")},
-    {0,              XF86XK_AudioRaiseVolume,       spawn,          SHCMD("amixer -D pulse sset Master 5%+")},
-    {0,              XF86XK_AudioLowerVolume,       spawn,          SHCMD("amixer -D pulse sset Master 5%-")},
+    {0,              XF86XK_AudioRaiseVolume,       spawn,          SHCMD("amixer -c 1 sset Master 5%+")},
+    {0,              XF86XK_AudioLowerVolume,       spawn,          SHCMD("amixer -c 1 sset Master 5%-")},
     {0,              XF86XK_MonBrightnessDown,      spawn,          SHCMD("xbacklight -dec 5")},
     {0,              XF86XK_MonBrightnessUp,        spawn,          SHCMD("xbacklight -inc 5")},
 
