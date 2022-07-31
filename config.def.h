@@ -57,7 +57,7 @@ typedef struct {
 	const void *cmd;
 } Sp;
 const char *spcmd1[] = {"st", "-n", "spterm", "-g", "120x37", NULL };
-const char *spcmd2[] = {"st", "-n", "ncmpcpp", "-g", "120x35", "-e", "ncmpcpp", NULL };
+const char *spcmd2[] = {"st", "-n", "ncmpcpp", "-g", "120x35", "-e", "ncspot", NULL };
 const char *spcmd3[] = {"st", "-n", "mutt", "-g", "144x72", "-e", "neomutt", NULL };
 const char *spcmd4[] = {"st", "-n", "htop", "-g", "144x72", "-e", "btop", NULL };
 const char *spcmd5[] = {"st", "-n", "weechat", "-g", "144x72", "-e", "weechat", NULL };
@@ -66,8 +66,8 @@ static Sp scratchpads[] = {
 	{"spterm",      spcmd1},
 	{"ncmpcpp",     spcmd2},
 	{"mutt",        spcmd3},
-    {"htop",        spcmd4},
-    {"weechat",     spcmd5},
+  {"htop",        spcmd4},
+  {"weechat",     spcmd5},
 };
 
 /* tagging */
