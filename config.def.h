@@ -174,14 +174,14 @@ static Key keys[] = {
     { MODKEY,                           XK_c,       spawn,          SHCMD("rofi -show drun") },
     { MODKEY,                           XK_Return,  spawn,          SHCMD("st")},
     { MODKEY,                           XK_w,       spawn,          SHCMD("pcmanfm") },
-    { MODKEY|ShiftMask,                 XK_l,       spawn,          SHCMD("st -e slock") },
+    { MODKEY|ShiftMask,                 XK_l,       spawn,          SHCMD("slock") },
 
     // Languages
     { MODKEY|ControlMask|ShiftMask,     XK_n,       spawn,          SHCMD("setxkbmap -layout no") },
     { MODKEY|ControlMask|ShiftMask,     XK_u,       spawn,          SHCMD("setxkbmap -layout us") },
 
     // Suspend
-    { MODKEY|ShiftMask,                 XK_p,       spawn,          SHCMD("systemctl suspend") },
+    { MODKEY|ShiftMask,                 XK_p,       spawn,          SHCMD("systemctl suspend && slock") },
 
     // scratchpads
 	  { MODKEY,            			          XK_grave,   togglescratch,  {.ui = 0 } },
