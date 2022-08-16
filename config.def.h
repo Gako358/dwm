@@ -176,6 +176,10 @@ static Key keys[] = {
     { MODKEY,                           XK_w,       spawn,          SHCMD("pcmanfm") },
     { MODKEY|ShiftMask,                 XK_l,       spawn,          SHCMD("slock") },
 
+    // Window opacity
+    { MODKEY|ControlMask,               XK_a,       spawn,          SHCMD("picom-trans -c -10") },
+    { MODKEY|ControlMask|ShiftMask,     XK_a,       spawn,          SHCMD("picom-trans -c +100") },
+
     // Languages
     { MODKEY|ControlMask|ShiftMask,     XK_n,       spawn,          SHCMD("setxkbmap -layout no") },
     { MODKEY|ControlMask|ShiftMask,     XK_u,       spawn,          SHCMD("setxkbmap -layout us") },
