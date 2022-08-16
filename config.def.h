@@ -175,6 +175,7 @@ static Key keys[] = {
     { MODKEY,                           XK_Return,  spawn,          SHCMD("st")},
     { MODKEY,                           XK_w,       spawn,          SHCMD("pcmanfm") },
     { MODKEY|ShiftMask,                 XK_l,       spawn,          SHCMD("slock") },
+    { MODKEY|ControlMask|ShiftMask,     XK_p,       spawn,          SHCMD("scrot -d3 /home/merrinx/Pictures/Screenshots/") },
 
     // Window opacity
     { MODKEY|ControlMask,               XK_a,       spawn,          SHCMD("picom-trans -c -10") },
