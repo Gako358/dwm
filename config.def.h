@@ -172,7 +172,7 @@ static Key keys[] = {
 
     // Apps
     { MODKEY,                           XK_c,       spawn,          SHCMD("rofi -show drun") },
-    { MODKEY,                           XK_Return,  spawn,          SHCMD("alacritty")},
+    { MODKEY,                           XK_Return,  spawn,          SHCMD("st")},
     { MODKEY,                           XK_w,       spawn,          SHCMD("pcmanfm") },
     { MODKEY|ShiftMask,                 XK_l,       spawn,          SHCMD("slock") },
     { MODKEY|ControlMask|ShiftMask,     XK_p,       spawn,          SHCMD("scrot -d3 /home/merrinx/Pictures/Screenshots/") },
