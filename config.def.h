@@ -56,11 +56,11 @@ typedef struct {
 	const char *name;
 	const void *cmd;
 } Sp;
-const char *spcmd1[] = {"st", "-n", "spterm", "-g", "120x37", NULL };
-const char *spcmd2[] = {"st", "-n", "ncmpcpp", "-g", "120x35", "-e", "ncspot", NULL };
-const char *spcmd3[] = {"st", "-n", "mutt", "-g", "144x46", "-e", "neomutt", NULL };
-const char *spcmd4[] = {"st", "-n", "htop", "-g", "144x46", "-e", "btop", NULL };
-const char *spcmd5[] = {"st", "-n", "weechat", "-g", "144x46", "-e", "weechat", NULL };
+const char *spcmd1[] = {"alacritty", "-n", "spterm", "-g", "120x37", NULL };
+const char *spcmd2[] = {"alacritty", "-n", "ncmpcpp", "-g", "120x35", "-e", "ncspot", NULL };
+const char *spcmd3[] = {"alacritty", "-n", "mutt", "-g", "144x46", "-e", "neomutt", NULL };
+const char *spcmd4[] = {"alacritty", "-n", "htop", "-g", "144x46", "-e", "btop", NULL };
+const char *spcmd5[] = {"alacritty", "-n", "weechat", "-g", "144x46", "-e", "weechat", NULL };
 static Sp scratchpads[] = {
 	/* name          cmd  */
 	{"spterm",      spcmd1},
@@ -172,7 +172,7 @@ static Key keys[] = {
 
     // Apps
     { MODKEY,                           XK_c,       spawn,          SHCMD("rofi -show drun") },
-    { MODKEY,                           XK_Return,  spawn,          SHCMD("st")},
+    { MODKEY,                           XK_Return,  spawn,          SHCMD("alacritty")},
     { MODKEY,                           XK_w,       spawn,          SHCMD("pcmanfm") },
     { MODKEY|ShiftMask,                 XK_l,       spawn,          SHCMD("slock") },
     { MODKEY|ControlMask|ShiftMask,     XK_p,       spawn,          SHCMD("scrot -d3 /home/merrinx/Pictures/Screenshots/") },
