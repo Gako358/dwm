@@ -173,6 +173,7 @@ static Key keys[] = {
 
     // Apps
     { MODKEY,                           XK_c,       spawn,          SHCMD("rofi -show drun") },
+    { MODKEY|ShiftMask,                 XK_q,       spawn,          SHCMD("rofi -show power-menu -modi power-menu:rofi-power-menu") },
     { MODKEY,                           XK_Return,  spawn,          SHCMD("st")},
     { MODKEY,                           XK_w,       spawn,          SHCMD("pcmanfm") },
     { MODKEY|ShiftMask,                 XK_l,       spawn,          SHCMD("slock") },
