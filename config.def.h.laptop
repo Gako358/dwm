@@ -56,12 +56,11 @@ typedef struct {
 	const char *name;
 	const void *cmd;
 } Sp;
-const char *spcmd1[] = {"st", "-n", "spterm", "-g", "190x55", NULL };
-const char *spcmd2[] = {"st", "-n", "ncmpcpp", "-g", "190x55", "-e", "ncspot", NULL };
-const char *spcmd3[] = {"st", "-n", "mutt", "-g", "280x64", "-e", "neomutt", NULL };
-const char *spcmd4[] = {"st", "-n", "htop", "-g", "280x64", "-e", "btop", NULL };
-const char *spcmd5[] = {"st", "-n", "weechat", "-g", "280x64", "-e", "weechat", NULL };
-const char *spcmd6[] = {"st", "-n", "ranger", "-g", "190x55", "-e", "ranger", NULL };
+const char *spcmd1[] = {"st", "-n", "spterm", "-g", "155x46", NULL };
+const char *spcmd2[] = {"st", "-n", "ncmpcpp", "-g", "128x37", "-e", "ncspot", NULL };
+const char *spcmd3[] = {"st", "-n", "mutt", "-g", "172x46", "-e", "neomutt", NULL };
+const char *spcmd4[] = {"st", "-n", "htop", "-g", "144x46", "-e", "btop", NULL };
+const char *spcmd5[] = {"st", "-n", "weechat", "-g", "172x46", "-e", "weechat", NULL };
 static Sp scratchpads[] = {
 	/* name          cmd  */
 	{"spterm",      spcmd1},
@@ -69,7 +68,6 @@ static Sp scratchpads[] = {
 	{"mutt",        spcmd3},
   {"htop",        spcmd4},
   {"weechat",     spcmd5},
-  {"ranger",      spcmd6},
 };
 
 /* tagging */
@@ -98,6 +96,8 @@ static const Rule rules[] = {
      */
     /* class      instance    title       tags mask     iscentered   isfloating   monitor */
     { "Gimp",         NULL,       NULL,       0,            1,           1,           -1 },
+    { "Joplin",       NULL,       NULL,       0,            1,           1,           -1 },
+    { "Qalculate-gtk",NULL,       NULL,       0,            1,           1,           -1 },
     { "firefox",      NULL,       NULL,       1,            0,           0,           -1 },
     { "thunderbird",  NULL,       NULL,       1 << 3,       1,           1,           -1 },
     { "discord",      NULL,       NULL,       1 << 4,       0,           0,           -1 },
@@ -109,7 +109,6 @@ static const Rule rules[] = {
 	  { NULL,		  "mutt",	    NULL,		SPTAG(2),		0,      1,			 -1 },
     { NULL,		  "htop",	    NULL,		SPTAG(3),		0,      1,			 -1 },
     { NULL,		  "weechat",	NULL,		SPTAG(4),		0,      1,			 -1 },
-    { NULL,		  "ranger",	  NULL,		SPTAG(5),		0,      1,			 -1 },
 };
 
 /* layout(s) */
@@ -197,7 +196,6 @@ static Key keys[] = {
 	  { MODKEY|ShiftMask,            	    XK_m,	      togglescratch,  {.ui = 2 } },
     { MODKEY|ShiftMask,            	    XK_b,	      togglescratch,  {.ui = 3 } },
     { MODKEY|ShiftMask,            	    XK_c,	      togglescratch,  {.ui = 4 } },
-    { MODKEY,            	              XK_r,	      togglescratch,  {.ui = 5 } },
 
     // toggle stuff
     { MODKEY,                           XK_b,       togglebar,      {0} },
