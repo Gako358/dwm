@@ -32,7 +32,7 @@ static const char *fonts[]          = { "JetBrainsMono Nerd Font:style:medium:si
                                         "Material Design Icons-Regular:size=10" };
 
 // theme
-#include "themes/kanagawa.h"
+#include "themes/gruvchad.h"
 
 static const char *colors[][3]      = {
     /*                     fg       bg      border */
@@ -56,12 +56,12 @@ typedef struct {
 	const char *name;
 	const void *cmd;
 } Sp;
-const char *spcmd1[] = {"st", "-n", "spterm", "-g", "190x55", NULL };
-const char *spcmd2[] = {"st", "-n", "ncmpcpp", "-g", "190x55", "-e", "ncspot", NULL };
-const char *spcmd3[] = {"st", "-n", "mutt", "-g", "280x73", "-e", "neomutt", NULL };
-const char *spcmd4[] = {"st", "-n", "htop", "-g", "280x73", "-e", "btop", NULL };
-const char *spcmd5[] = {"st", "-n", "weechat", "-g", "280x73", "-e", "weechat", NULL };
-const char *spcmd6[] = {"st", "-n", "ranger", "-g", "190x55", "-e", "ranger", NULL };
+const char *spcmd1[] = {"st", "-n", "spterm", "-g", "155x46", NULL };
+const char *spcmd2[] = {"st", "-n", "ncmpcpp", "-g", "128x37", "-e", "ncspot", NULL };
+const char *spcmd3[] = {"st", "-n", "mutt", "-g", "172x46", "-e", "neomutt", NULL };
+const char *spcmd4[] = {"st", "-n", "htop", "-g", "144x46", "-e", "btop", NULL };
+const char *spcmd5[] = {"st", "-n", "weechat", "-g", "172x46", "-e", "weechat", NULL };
+const char *spcmd6[] = {"st", "-n", "ranger", "-g", "172x46", "-e", "ranger", NULL };
 static Sp scratchpads[] = {
 	/* name          cmd  */
 	{"spterm",      spcmd1},
@@ -161,8 +161,8 @@ static Key keys[] = {
     {0,                     XF86XK_AudioPrev,       spawn,          SHCMD("mpc prev")},
     {0,                     XF86XK_AudioPlay,       spawn,          SHCMD("mpc play")},
     {0,                     XF86XK_AudioStop,       spawn,          SHCMD("mpc pause")},
-    {0,              XF86XK_AudioRaiseVolume,       spawn,          SHCMD("amixer -c 1 sset Master 5%+")},
-    {0,              XF86XK_AudioLowerVolume,       spawn,          SHCMD("amixer -c 1 sset Master 5%-")},
+    {0,              XF86XK_AudioRaiseVolume,       spawn,          SHCMD("amixer -c 0 sset Master 5%+")},
+    {0,              XF86XK_AudioLowerVolume,       spawn,          SHCMD("amixer -c 0 sset Master 5%-")},
     {0,              XF86XK_MonBrightnessDown,      spawn,          SHCMD("xbacklight -dec 5")},
     {0,              XF86XK_MonBrightnessUp,        spawn,          SHCMD("xbacklight -inc 5")},
 
