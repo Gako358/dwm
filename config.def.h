@@ -126,6 +126,7 @@ static const Layout layouts[] = {
     /* symbol     arrange function */
     { "[@]",      spiral },
     { "[]=",      tile },    /* first entry is default */
+    { "|M|",      centeredmaster },
     { "[M]",      monocle },
     { "[\\]",     dwindle },
     { "H[]",      deck },
@@ -135,7 +136,6 @@ static const Layout layouts[] = {
     { "###",      nrowgrid },
     { "---",      horizgrid },
     { ":::",      gaplessgrid },
-    { "|M|",      centeredmaster },
     { ">M>",      centeredfloatingmaster },
     { "><>",      NULL },    /* no layout function means floating behavior */
 };
