@@ -189,7 +189,7 @@ static Key keys[] = {
     { MODKEY|ControlMask|ShiftMask,     XK_u,       spawn,          SHCMD("setxkbmap -layout us") },
 
     // Suspend
-    { MODKEY|ShiftMask,                 XK_p,       spawn,          SHCMD("systemctl suspend && slock") },
+    { MODKEY|ShiftMask,                 XK_p,       spawn,          SHCMD("systemctl suspend") },
 
     // scratchpads
 	  { MODKEY,            			          XK_grave,   togglescratch,  {.ui = 0 } },
