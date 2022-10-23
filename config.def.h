@@ -28,9 +28,6 @@ static const int scalepreview       = 4;
 static const int tag_preview        = 1;        /* 1 means enable, 0 is off */
 static const int colorfultag        = 1;        /* 0 means use SchemeSel for selected non vacant tag */
 
-#define ICONSIZE 19 /* size of the icons in the bar */
-#define ICONSPACING 7 /* spacing between icons in the bar and the title */
-
 static const char *fonts[]          = { "JetBrainsMono Nerd Font:style:medium:size=13",
                                         "Material Design Icons-Regular:size=10" };
 
@@ -41,7 +38,6 @@ static const char *colors[][3]      = {
     /*                     fg       bg      border */
     [SchemeNorm]       = { gray3,   black,  gray2 },
     [SchemeSel]        = { gray4,   blue,   blue  },
-    [SchemeTitle]      = { white,   black,  black },
     [TabSel]           = { blue,    gray2,  black },
     [TabNorm]          = { gray3,   black,  black },
     [SchemeTag]        = { gray3,   black,  black },
