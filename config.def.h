@@ -24,7 +24,7 @@ static const int vertpadbar         = 11;
 static const int vertpadtab         = 33;
 static const int horizpadtabi       = 15;
 static const int horizpadtabo       = 15;
-static const int scalepreview       = 5;
+static const int scalepreview       = 4;
 static const int tag_preview        = 1;        /* 1 means enable, 0 is off */
 static const int colorfultag        = 1;        /* 0 means use SchemeSel for selected non vacant tag */
 
