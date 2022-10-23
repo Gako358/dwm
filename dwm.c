@@ -288,7 +288,7 @@ static Client *nexttiled(Client *c);
 static void placemouse(const Arg *arg);
 static void pop(Client *);
 static void propertynotify(XEvent *e);
-static void quit(const Arg *arg);
+static void restart(const Arg *arg);
 static Client *recttoclient(int x, int y, int w, int h);
 static Monitor *recttomon(int x, int y, int w, int h);
 static void removesystrayicon(Client *i);
@@ -320,8 +320,6 @@ static void show(Client *c);
 static void showhide(Client *c);
 static void showtagpreview(int tag);
 static void sigchld(int unused);
-static void sighup(int unused);
-static void sigterm(int unused);
 static void spawn(const Arg *arg);
 static void switchtag(void);
 static Monitor *systraytomon(Monitor *m);
@@ -391,7 +389,6 @@ static void (*handler[LASTEvent])(XEvent *) = {
     [ResizeRequest] = resizerequest,
     [UnmapNotify] = unmapnotify};
 static Atom wmatom[WMLast], netatom[NetLast], xatom[XLast];
-static int restart = 0;
 static int running = 1;
 static Cur *cursor[CurLast];
 static Clr **scheme, clrborder;
@@ -647,9 +644,9 @@ void buttonpress(XEvent *e) {
 			}
 	}
 
-	if (ev->x > selmon->ww - TEXTW(stext))
+	if (ev->x > selmon->ww - (int)TEXTW(stext))
          click = ClkStatusText;
-    else
+  else
          click = ClkWinTitle;
     	}
 	if(ev->window == selmon->tabwin) {
@@ -726,6 +723,7 @@ void cleanup(void) {
     drw_cur_free(drw, cursor[i]);
   for (i = 0; i < LENGTH(colors) + 1; i++)
     free(scheme[i]);
+  free(scheme);
   XDestroyWindow(dpy, wmcheckwin);
   drw_free(drw);
   XSync(dpy, False);
@@ -1461,6 +1459,9 @@ void drawbar(Monitor *m) {
 
   if (showsystray && m == systraytomon(m))
     stw = getsystraywidth();
+
+  if (!m->showbar)
+    return;
 
   /* draw status first so it can be overdrawn by tags later */
   if (m == selmon) { /* status is only drawn on selected monitor */
@@ -2373,21 +2374,7 @@ void propertynotify(XEvent *e) {
   }
 }
 
-void quit(const Arg *arg) {
-  if(arg->i == 0)  system("killall bar.sh");
-
-  else if (arg->i)
-    restart = 1;
-
-	Monitor *m;
-	Client *c;
-	for (m = mons; m; m = m->next) {
-		if (m) {
-			for (c = m->stack; c; c = c->next)
-				if (c && HIDDEN(c)) show(c);
-		}
-	}
-
+void restart(const Arg *arg) {
   running = 0;
 }
 
@@ -2790,9 +2777,6 @@ void setup(void) {
   /* clean up any zombies immediately */
   sigchld(0);
 
-  signal(SIGHUP, sighup);
-  signal(SIGTERM, sigterm);
-
   /* init screen */
   screen = DefaultScreen(dpy);
   sw = DisplayWidth(dpy, screen);
@@ -2953,16 +2937,6 @@ void sigchld(int unused) {
     die("can't install SIGCHLD handler:");
   while (0 < waitpid(-1, NULL, WNOHANG))
     ;
-}
-
-void sighup(int unused) {
-  Arg a = {.i = 1};
-  quit(&a);
-}
-
-void sigterm(int unused) {
-  Arg a = {.i = 0};
-  quit(&a);
 }
 
 #define SPAWN_CWD_DELIM " []{}()<>\"':"
@@ -3773,8 +3747,6 @@ int main(int argc, char *argv[]) {
 #endif /* __OpenBSD__ */
   scan();
   run();
-  if (restart)
-    execvp(argv[0], argv);
   cleanup();
   XCloseDisplay(dpy);
   return EXIT_SUCCESS;
