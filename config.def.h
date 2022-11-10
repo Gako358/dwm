@@ -32,7 +32,7 @@ static const char *fonts[]          = { "JetBrainsMono Nerd Font:style:medium:si
                                         "Material Design Icons-Regular:size=10" };
 
 // theme
-static const char black[]       = "#16161D";
+static const char black[]       = "#282828";
 static const char gray2[]       = "#3B4252"; // unfocused window border
 static const char gray3[]       = "#606672";
 static const char gray4[]       = "#6d8dad";
