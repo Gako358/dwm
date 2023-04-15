@@ -107,13 +107,14 @@ static const Rule rules[] = {
      *	WM_NAME(STRING) = title
      */
     /* class      instance    title       tags mask     iscentered   isfloating   monitor */
-    { "Gimp",         NULL,       NULL,       0,            1,           1,           -1 },
-    { "firefox",      NULL,       NULL,       1,            0,           0,           -1 },
-    { "thunderbird",  NULL,       NULL,       1 << 3,       1,           1,           -1 },
-    { "discord",      NULL,       NULL,       1 << 4,       0,           0,           -1 },
-    { "eww",          NULL,       NULL,       0,            0,           1,           -1 },
-    { "Pcmanfm",      NULL,       NULL,       0,            0,           1,           -1 },
-    { "Zathura",      NULL,       NULL,       0,            0,           1,           -1 },
+    { "Gimp",         NULL,       NULL,       0,            1,            1,            -1 },
+    { "firefox",      NULL,       NULL,       1,            0,            0,            -1 },
+    { "thunderbird",  NULL,       NULL,       1 << 3,       1,            1,            -1 },
+    { "discord",      NULL,       NULL,       1 << 4,       0,            0,            -1 },
+    { "eww",          NULL,       NULL,       0,            0,            1,            -1 },
+    { "Pcmanfm",      NULL,       NULL,       0,            0,            1,            -1 },
+    { "Zathura",      NULL,       NULL,       0,            0,            1,            -1 },
+    { "Wefica",       NULL,       NULL,       1 << 2,       0,            0,            -1 },
 
     // Citrix
     { "Remote Desktop Connection",      NULL,       NULL,       1 << 2,            0,           1,           -1 },
