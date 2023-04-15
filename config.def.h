@@ -114,7 +114,7 @@ static const Rule rules[] = {
     { "eww",          NULL,       NULL,       0,            0,            1,            -1 },
     { "Pcmanfm",      NULL,       NULL,       0,            0,            1,            -1 },
     { "Zathura",      NULL,       NULL,       0,            0,            1,            -1 },
-    { "Wefica",       NULL,       NULL,       1 << 2,       0,            0,            -1 },
+    { "Wfica",        NULL,       NULL,       1 << 2,       0,            0,            -1 },
 
     // Citrix
     { "Remote Desktop Connection",      NULL,       NULL,       1 << 2,            0,           1,           -1 },
