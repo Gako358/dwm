@@ -118,6 +118,9 @@ static const Rule rules[] = {
     { "Zathura",      NULL,       NULL,       0,            0,            1,            -1 },
     { "Wfica",        NULL,       NULL,       1 << 2,       0,            0,            -1 },
 
+    // Teams
+    { "Microsoft Teams - Preview",        NULL,       NULL,       1 << 4,       0,           0,           -1 },
+
     // Citrix
     { "Remote Desktop Connection",      NULL,       NULL,       1 << 2,            0,           1,           -1 },
 
