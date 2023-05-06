@@ -6,29 +6,32 @@
     flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, nixpkgs, flake-utils }:
-    flake-utils.lib.eachDefaultSystem (system:
-      let
+  outputs = {
+    self,
+    nixpkgs,
+    flake-utils,
+  }:
+    flake-utils.lib.eachDefaultSystem (
+      system: let
         pkgs = import nixpkgs {
           inherit system;
           overlays = [
             (final: prev: {
               dwmMX = prev.dwm.overrideAttrs (oldAttrs: rec {
-				src = builtins.path {
-					path = ./.;
-					name = "dwmMX";
-				};
-                buildInputs = 
-					oldAttrs.buildInputs
-					++ [
-						prev.imlib2
-					];
+                src = builtins.path {
+                  path = ./.;
+                  name = "dwmMX";
+                };
+                buildInputs =
+                  oldAttrs.buildInputs
+                  ++ [
+                    prev.imlib2
+                  ];
               });
             })
           ];
         };
-      in
-      rec {
+      in rec {
         apps = {
           dwm = {
             type = "app";
@@ -41,8 +44,18 @@
         defaultPackage = pkgs.dwmMX;
 
         devShell = pkgs.mkShell {
-          buildInputs = with pkgs; [ xorg.libX11 xorg.libXft xorg.libXinerama gcc pkgconfig imlib2 ];
+          buildInputs = with pkgs; [xorg.libX11 xorg.libXft xorg.libXinerama gcc pkgconfig imlib2];
         };
+
+        overlays.default = overlays;
+        checks.${system}.build =
+          (
+            import nixpkgs {
+              inherit system;
+              overlays = [overlays];
+            }
+          )
+          .dwmMX;
       }
     );
 }
