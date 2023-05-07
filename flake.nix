@@ -55,7 +55,11 @@
         packages.dwm = pkgs.dwm;
         defaultApp = apps.dwm;
         defaultPackage = packages.dwm;
-        overlays.default = overlay;
+        overlays = {
+          default = self: super: {
+            inherit overlay;
+          };
+        };
       }
     );
 }
