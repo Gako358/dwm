@@ -10,30 +10,27 @@
     self,
     nixpkgs,
     flake-utils,
-  }:
+  }: let
+    mkOverlay = system: final: prev: {
+      dwm = prev.dwm.overrideAttrs (old: {
+        src = builtins.path {
+          path = ./.;
+          name = "dwm";
+        };
+        buildInputs =
+          old.buildInputs
+          ++ [
+            prev.imlib2
+          ];
+      });
+    };
+  in
     flake-utils.lib.eachDefaultSystem (
       system: let
+        overlay = mkOverlay system;
         pkgs = import nixpkgs {
           inherit system;
-          overlays = [
-            (final: prev: {
-              dwm = prev.dwm.overrideAttrs (old: {
-                src = builtins.path {
-                  path = ./.;
-                  name = "dwm";
-                };
-                buildInputs =
-                  old.buildInputs
-                  ++ [
-                    prev.imlib2
-                  ];
-              });
-            })
-          ];
-        };
-
-        overlay = final: prev: {
-          dwm = prev.dwm;
+          overlays = [overlay];
         };
       in rec {
         apps = {
@@ -58,10 +55,7 @@
         packages.dwm = pkgs.dwm;
         defaultApp = apps.dwm;
         defaultPackage = packages.dwm;
-
-        overlays = {
-          default = overlay;
-        };
+        overlays.default = overlay;
       }
     );
 }
