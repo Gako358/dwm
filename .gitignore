@@ -42,6 +42,9 @@
 *.idb
 *.pdb
 
+# CCLS cache
+.ccls-cache/
+
 # Kernel Module Compile Results
 *.mod*
 *.cmd
