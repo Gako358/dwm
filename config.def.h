@@ -48,22 +48,22 @@ static const char col_borderbar[]  = "#282828"; // inner border
 
 static const char *colors[][3] = {
     /*                     fg       bg      border */
-    [SchemeNorm] = {gray3, black, gray2},
-    [SchemeSel] = {gray4, blue, blue},
-    [TabSel] = {blue, gray2, black},
-    [TabNorm] = {gray3, black, black},
-    [SchemeTag] = {gray3, black, black},
-    [SchemeTag1] = {blue, black, black},
-    [SchemeTag2] = {diff, black, black},
-    [SchemeTag3] = {cyan, black, black},
-    [SchemeTag4] = {orange, black, black},
-    [SchemeTag5] = {red, black, black},
-    [SchemeTag6] = {yellow, black, black},
-    [SchemeTag7] = {pink, black, black},
-    [SchemeLayout] = {green, black, black},
-    [SchemeBtnPrev] = {green, black, black},
-    [SchemeBtnNext] = {yellow, black, black},
-    [SchemeBtnClose] = {red, black, black},
+    [SchemeNorm]      = {gray3, black, gray2},
+    [SchemeSel]       = {gray4, blue, blue},
+    [TabSel]          = {blue, gray2, black},
+    [TabNorm]         = {gray3, black, black},
+    [SchemeTag]       = {gray3, black, black},
+    [SchemeTag1]      = {blue, black, black},
+    [SchemeTag2]      = {diff, black, black},
+    [SchemeTag3]      = {cyan, black, black},
+    [SchemeTag4]      = {orange, black, black},
+    [SchemeTag5]      = {red, black, black},
+    [SchemeTag6]      = {yellow, black, black},
+    [SchemeTag7]      = {pink, black, black},
+    [SchemeLayout]    = {green, black, black},
+    [SchemeBtnPrev]   = {green, black, black},
+    [SchemeBtnNext]   = {yellow, black, black},
+    [SchemeBtnClose]  = {red, black, black},
 };
 
 typedef struct {
@@ -104,22 +104,22 @@ static const Rule rules[] = {
      *	WM_NAME(STRING) = title
      */
     /* class instance title tags mask iscentered isfloating monitor */
-    {"Gimp",        NULL, NULL, 0, 1, 1, -1},
-    {"firefox",     NULL, NULL, 1, 0, 0, -1},
-    {"thunderbird", NULL, NULL, 1 << 5, 0, 0, -1},
-    {"discord",     NULL, NULL, 1 << 6, 0, 0, -1},
-    {"Slack",       NULL, NULL, 1 << 5, 0, 0, -1},
-    {"Geany",       NULL, NULL, 0, 0, 1, -1},
-    {"eww",         NULL, NULL, 0, 0, 1, -1},
-    {"Pcmanfm",     NULL, NULL, 0, 0, 1, -1},
-    {"Zathura",     NULL, NULL, 0, 0, 1, -1},
-    {"Wfica",       NULL, NULL, 1 << 4, 0, 0, -1},
+    {"Gimp",                NULL, NULL, 0, 1, 1, -1},
+    {"firefox",             NULL, NULL, 1, 0, 0, -1},
+    {"thunderbird",         NULL, NULL, 1 << 5, 0, 0, -1},
+    {"Geany",               NULL, NULL, 0, 0, 1, -1},
+    {"Pcmanfm",             NULL, NULL, 0, 0, 1, -1},
+    {"Zathura",             NULL, NULL, 0, 0, 1, -1},
+    {"Wfica",               NULL, NULL, 1 << 4, 0, 0, -1},
 
-    // Teams
-    {"Microsoft Teams - Preview", NULL, NULL, 1 << 6, 0, 0, -1},
-
+    // Chromium Apps
+    {NULL, "teams.live.com",                                NULL, 1 << 4, 0, 0, -1},
+    {NULL, "discord.com__channels_@me",                     NULL, 1 << 6, 0, 0, -1},
+    {NULL, "app.slack.com__client_T04MZPW21RA_C04MUBWKREZ", NULL, 1 << 6, 0, 0, -1},
     // Citrix
-    {"Remote Desktop Connection", NULL, NULL, 1 << 4, 0, 1, -1},
+    {"Remote Desktop Connection",   NULL, NULL, 1 << 4, 0, 1, -1},
+    // Microsoft Edge
+    {"Microsoft-edge-dev",          NULL, NULL, 1, 0, 0, -1},
 
     // scratchpads
     {NULL, "spterm",        NULL, SPTAG(0), 0, 1, -1},
