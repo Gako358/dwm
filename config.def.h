@@ -70,24 +70,20 @@ typedef struct {
   const char *name;
   const void *cmd;
 } Sp;
-const char *spcmd1[] = {"st", "-n", "spterm",       "-g", "190x91", NULL};
+const char *spcmd1[] = {"st", "-n", "spterm",       "-g", "280x91", NULL};
 const char *spcmd2[] = {"st", "-n", "ncmpcpp",      "-g", "190x55", "-e", "ncspot",   NULL};
 const char *spcmd3[] = {"st", "-n", "mutt",         "-g", "280x73", "-e", "neomutt",  NULL};
-const char *spcmd4[] = {"st", "-n", "htop",         "-g", "280x73", "-e", "btop",     NULL};
+const char *spcmd4[] = {"st", "-n", "htop",         "-g", "280x73", "-e", "btm",     NULL};
 const char *spcmd5[] = {"st", "-n", "weechat",      "-g", "280x73", "-e", "weechat",  NULL};
-const char *spcmd6[] = {"st", "-n", "ranger",       "-g", "190x55", "-e", "ranger",   NULL};
-const char *spcmd7[] = {"st", "-n", "runtermone",   "-g", "190x91", NULL};
-const char *spcmd8[] = {"st", "-n", "runtermtwo",   "-g", "190x91", NULL};
-const char *spcmd9[] = {"st", "-n", "runtermthree", "-g", "190x91", NULL};
+const char *spcmd6[] = {"st", "-n", "ranger",       "-g", "280x55", "-e", "ranger",   NULL};
 static Sp scratchpads[] = {
     /* name          cmd  */
     {"spterm", spcmd1},     {"ncmpcpp", spcmd2},    {"mutt", spcmd3},
     {"htop", spcmd4},       {"weechat", spcmd5},    {"ranger", spcmd6},
-    {"runtermone", spcmd7}, {"runtermtwo", spcmd8}, {"runtermthree", spcmd9},
 };
 
 /* tagging */
-static char *tags[] = {"", "", "", "", "", "", ""};
+static char *tags[] = {"", "", "", "", "", "", ""};
 
 static const int tagschemes[] = {
     SchemeTag1, SchemeTag2, SchemeTag3, SchemeTag4, SchemeTag5, SchemeTag6, SchemeTag7,
@@ -119,7 +115,7 @@ static const Rule rules[] = {
     // Citrix
     {"Remote Desktop Connection",   NULL, NULL, 1 << 4, 0, 1, -1},
     // Microsoft Edge
-    {"Microsoft-edge-dev",          NULL, NULL, 1, 0, 0, -1},
+    {"Microsoft-edge",              NULL, NULL, 1 << 4, 0, 0, -1},
 
     // scratchpads
     {NULL, "spterm",        NULL, SPTAG(0), 0, 1, -1},
@@ -128,9 +124,6 @@ static const Rule rules[] = {
     {NULL, "htop",          NULL, SPTAG(3), 0, 1, -1},
     {NULL, "weechat",       NULL, SPTAG(4), 0, 1, -1},
     {NULL, "ranger",        NULL, SPTAG(5), 0, 1, -1},
-    {NULL, "runtermone",    NULL, SPTAG(6), 0, 1, -1},
-    {NULL, "runtermtwo",    NULL, SPTAG(7), 0, 1, -1},
-    {NULL, "runtermthree",  NULL, SPTAG(8), 0, 1, -1},
 };
 
 /* layout(s) */
@@ -224,10 +217,6 @@ static const Key keys[] = {
     {MODKEY | ShiftMask, XK_b, togglescratch, {.ui = 3}},
     {MODKEY | ShiftMask, XK_c, togglescratch, {.ui = 4}},
     {MODKEY, XK_r, togglescratch, {.ui = 5}},
-    // Runtime scratchpads
-    {MODKEY | ShiftMask | ControlMask | Mod1Mask, XK_1, togglescratch, {.ui = 6}},
-    {MODKEY | ShiftMask | ControlMask | Mod1Mask, XK_2, togglescratch, {.ui = 7}},
-    {MODKEY | ShiftMask | ControlMask | Mod1Mask, XK_3, togglescratch, {.ui = 8}},
 
     // toggle stuff
     {MODKEY, XK_b, togglebar, {0}},
